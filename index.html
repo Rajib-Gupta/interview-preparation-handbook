@@ -1279,9 +1279,10 @@ State/Props/Context/Store update
             within a single process, sharing memory. Suitable for CPU-bound
             tasks that need shared state. example: <code>new Worker()</code>.
             <b>Child Processes:</b> Separate OS processes that can run any
-            executable, communicate via IPC. Useful for isolation or running
-            non-Node.js code. examples: <code>cluster.fork()</code>,
-            <code>new Worker()</code>, and <code>child_process.fork()</code>.
+            executable, communicate via IPC(Inter-Process Communication). Useful
+            for isolation or running non-Node.js code. examples:
+            <code>cluster.fork()</code>, <code>new Worker()</code>, and
+            <code>child_process.fork()</code>.
           </div>
         </details>
         <details class="qa" data-level="faang">
