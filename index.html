@@ -805,9 +805,10 @@ State/Props/Context/Store update
           <div class="answer">
             RTK Query cache invalidation is an automated mechanism that forces
             query endpoints to re-fetch stale data when server-side changes
-            occur. It relies on a declaration-based <code>"cache tag"</code> system to track
-            which queries rely on which pieces of data, ensuring the application
-            UI remains synchronized with the database.
+            occur. It relies on a declaration-based
+            <code>"cache tag"</code> system to track which queries rely on which
+            pieces of data, ensuring the application UI remains synchronized
+            with the database.
           </div>
         </details>
         <details class="qa" data-level="senior">
@@ -816,12 +817,115 @@ State/Props/Context/Store update
             page?
           </summary>
           <div class="answer">
-            Measure first: React Profiler, browser Performance panel, Web
-            Vitals, network waterfall, bundle analyzer. Separate network
-            latency, JavaScript parse/execute time, render cost, layout/paint,
-            and memory. Then optimize the actual bottleneck using code
-            splitting, virtualization, stable props, selective subscriptions,
-            memoization, caching, image optimization, or server rendering.
+            <p>
+              Here is a systematic approach to diagnosing a slow React page,
+              useful for both real debugging and interview discussion.
+            </p>
+            <ol>
+              <li>
+                <b>Confirm what "slow" means first.</b> Before touching code,
+                identify the exact symptom:
+                <ul>
+                  <li>Slow initial load (TTFB, bundle size, parsing).</li>
+                  <li>Slow interaction (button click feels laggy).</li>
+                  <li>Janky scrolling/animation (dropped frames).</li>
+                  <li>Slow re-renders (typing in an input lags).</li>
+                </ul>
+                Each symptom has a different diagnosis path, so do not guess.
+              </li>
+              <li>
+                <b>Measure before you optimize.</b>
+                <ul>
+                  <li>
+                    <b>Chrome DevTools Performance:</b> Record while
+                    reproducing slowness, inspect flame graph blocks, and look
+                    for long tasks (&gt;50ms) blocking the main thread.
+                  </li>
+                  <li>
+                    <b>React DevTools Profiler:</b> Record a render, inspect
+                    which components re-rendered and why, and flag high render
+                    counts relative to visible UI change.
+                  </li>
+                  <li>
+                    <b>Lighthouse / Web Vitals:</b> Use LCP, INP, and CLS to
+                    identify initial-load and responsiveness issues.
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <b>Check common culprits first.</b>
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Symptom</th>
+                      <th>Likely cause</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Whole app re-renders on small state change</td>
+                      <td>
+                        State too high in tree, missing memoization, or context
+                        value recreated on each render.
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Typing in input is laggy</td>
+                      <td>
+                        Expensive computation on each keystroke or uncontrolled
+                        re-renders of large lists.
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Initial load is slow</td>
+                      <td>
+                        Large bundle, render-blocking resources, or too many
+                        synchronous API calls before first paint.
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>List scrolling is janky</td>
+                      <td>Rendering thousands of DOM nodes without virtualization.</td>
+                    </tr>
+                    <tr>
+                      <td>Gets slow after some usage</td>
+                      <td>
+                        Memory leak from uncleared intervals, subscriptions, or
+                        event listeners.
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </li>
+              <li>
+                <b>Apply fixes matched to the cause.</b>
+                <ul>
+                  <li>
+                    <b>Unnecessary re-renders:</b> Use React.memo,
+                    useMemo/useCallback where profiling proves value, move state
+                    closer to usage, and split contexts.
+                  </li>
+                  <li>
+                    <b>Expensive computation:</b> Memoize, or move work off the
+                    main thread with useDeferredValue, startTransition, or Web
+                    Workers for heavy workloads.
+                  </li>
+                  <li>
+                    <b>Bundle size:</b> Code-split with React.lazy and verify
+                    large dependencies with a bundle analyzer.
+                  </li>
+                  <li>
+                    <b>Large lists:</b> Use virtualization (react-window,
+                    react-virtual).
+                  </li>
+                  <li>
+                    <b>Network waterfall:</b> Parallelize independent fetches,
+                    move data fetching earlier, and cache server state (for
+                    example with React Query).
+                  </li>
+                </ul>
+              </li>
+            </ol>
           </div>
         </details>
         <details class="qa" data-level="coding">
