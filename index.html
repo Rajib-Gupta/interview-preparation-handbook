@@ -279,7 +279,8 @@
       <div class="nav">
         <a href="#resume-map">Resume Map</a
         ><a href="#strategy">Preparation Strategy</a
-        ><a href="#javascript">JavaScript & TypeScript</a>
+        ><a href="#javascript">JavaScript</a>
+        <a href="#typescript">TypeScript</a>
         <a href="#react">React & State</a><a href="#next">Next.js</a
         ><a href="#node">Node.js & Express</a>
         <a href="#backend">Backend & Security</a
@@ -491,7 +492,7 @@
       </section>
 
       <section id="javascript" class="chapter searchable">
-        <h2>3. JavaScript & TypeScript — Beginner to Senior</h2>
+        <h2>3.1 JavaScript - Beginner to Senior</h2>
         <h3>Core mental model</h3>
         <p>
           JavaScript is a garbage-collected, prototype-based, dynamically typed
@@ -521,11 +522,7 @@ Source Code → Parse → AST → Bytecode / JIT Optimization
           call/apply/bind; prototypes; classes; property descriptors;
           iterables/iterators; generators; promises; async/await; event loop;
           modules; errors; memory/GC; functional programming; OOP; immutability;
-          currying; composition; debounce/throttle; deep clone limitations;
-          TypeScript structural typing, unions, intersections, generics, utility
-          types, narrowing, type guards, <code>unknown</code> vs
-          <code>any</code>, <code>never</code>, variance basics, declaration
-          files.
+          currying; composition; debounce/throttle; deep clone limitations.
         </p>
         <details class="qa" data-level="beginner">
           <summary>
@@ -579,6 +576,297 @@ Source Code → Parse → AST → Bytecode / JIT Optimization
           </summary>
           <div class="answer">
             Synchronous JavaScript runs on the call stack. Async operations are
+            handled by the host runtime. When the stack is empty, the runtime
+            drains the microtask queue-Promise reactions and
+            <code>queueMicrotask</code>-before processing the next task such as
+            a timer or I/O callback. In browsers, rendering opportunities occur
+            between tasks. A recursively growing microtask chain can starve
+            timers and rendering.
+          </div>
+        </details>
+        <details class="qa" data-level="advanced">
+          <summary>
+            <span class="badge">Advanced</span>How does prototypal inheritance
+            work internally?
+          </summary>
+          <div class="answer">
+            Objects have an internal <code>[[Prototype]]</code> link. Property
+            lookup checks the object first and then follows the prototype chain
+            until a property is found or the chain ends at <code>null</code>.
+            Constructor functions expose a <code>prototype</code> object used as
+            the prototype of instances created with <code>new</code>. ES classes
+            are syntax over prototype-based behavior, with additional semantics
+            such as strict mode and private fields.
+          </div>
+        </details>
+        <details class="qa" data-level="intermediate">
+          <summary>
+            <span class="badge">Intermediate</span>Promise.all vs allSettled vs
+            race vs any?
+          </summary>
+          <div class="answer">
+            <code>Promise.all</code> fulfills when all fulfill and rejects on
+            the first rejection. <code>allSettled</code> waits for every input
+            and returns statuses. <code>race</code> settles with the first
+            settled input. <code>any</code> fulfills with the first fulfillment
+            and rejects with <code>AggregateError</code> only if all reject.
+            Choose based on failure semantics, not convenience.
+          </div>
+        </details>
+        <details class="qa" data-level="senior">
+          <summary>
+            <span class="badge">Senior</span>What can cause memory leaks in a
+            JavaScript application?
+          </summary>
+          <div class="answer">
+            Unremoved event listeners, forgotten timers, unbounded caches,
+            detached DOM trees, accidental globals, long-lived closures
+            retaining large objects, unresolved subscriptions, and queues that
+            grow without backpressure. Diagnose with heap snapshots, allocation
+            timelines, retained-size analysis, and production memory metrics.
+          </div>
+        </details>
+        <details class="qa" data-level="coding">
+          <summary>
+            <span class="badge">Coding</span>Implement debounce and explain the
+            closure.
+          </summary>
+          <div class="answer">
+            <pre><code>function debounce(fn, delay) {
+  let timer;
+  return function (...args) {
+    clearTimeout(timer);
+    timer = setTimeout(() => fn.apply(this, args), delay);
+  };
+}</code></pre>
+            <p>
+              The returned function closes over <code>timer</code>. Each call
+              resets the timer, so only the latest invocation executes after
+              inactivity. Time O(1) per call; auxiliary space O(1), excluding
+              captured arguments.
+            </p>
+          </div>
+        </details>
+        <h3>Coding ladder</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Difficulty</th>
+              <th>Exercises</th>
+              <th>What interviewer tests</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Easy</td>
+              <td>
+                Flatten one level, frequency map, chunk array, unique values
+              </td>
+              <td>Syntax, edge cases, complexity</td>
+            </tr>
+            <tr>
+              <td>Medium</td>
+              <td>
+                Debounce, throttle, Promise.all polyfill, memoize, deep object
+                access
+              </td>
+              <td>Closures, async semantics, API design</td>
+            </tr>
+            <tr>
+              <td>Hard</td>
+              <td>
+                Concurrency limiter, event emitter, cancellable task pool, deep
+                clone with cycles
+              </td>
+              <td>State machines, scheduling, robustness</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="callout">
+          <b>Rapid revision:</b> Memorize microtask ordering, TDZ, closure
+          definition, <code>this</code> rules, prototype lookup, Promise
+          combinators, and shallow vs deep copy behavior.
+        </div>
+      </section>
+
+      <section id="typescript" class="chapter searchable">
+        <h2>3.2 TypeScript - Beginner to Senior</h2>
+        <h3>Core mental model</h3>
+        <p>
+          TypeScript is a statically typed superset of JavaScript. It performs
+          static analysis at build time and then erases types to emit plain
+          JavaScript, so type safety does not exist at runtime unless you add
+          explicit runtime validation.
+        </p>
+        <div class="diagram">
+          <pre>
+TypeScript Source → Parse → Type Check → Control Flow Analysis → Emit JavaScript
+                                         │
+                                         ▼
+                               tsc / Babel / SWC pipeline
+                                         │
+                                         ▼
+                           JavaScript runtime (browser or Node.js)</pre
+          >
+        </div>
+        <h3>Must-master syllabus</h3>
+        <p>
+          Type inference; annotations; structural typing; interfaces vs types;
+          unions; intersections; literal types; narrowing; discriminated unions;
+          generics and constraints; utility types; mapped types; conditional
+          types; indexed access; <code>keyof</code>; template literal types;
+          declaration files; module resolution; <code>tsconfig</code>
+          strictness flags; <code>unknown</code> vs <code>any</code>;
+          <code>never</code>; variance basics; and runtime validation boundaries.
+        </p>
+        <details class="qa" data-level="beginner">
+          <summary>
+            <span class="badge">Beginner</span>What problem does TypeScript
+            solve, and what does it not solve?
+          </summary>
+          <div class="answer">
+            TypeScript catches many category errors at compile time: wrong
+            argument shapes, unsafe property access, and invalid unions. It does
+            not enforce those types at runtime because emitted JavaScript has no
+            type metadata by default. External data from APIs, forms, and files
+            still needs runtime validation.
+          </div>
+        </details>
+        <details class="qa" data-level="intermediate">
+          <summary>
+            <span class="badge">Intermediate</span><code>any</code> vs
+            <code>unknown</code>?
+          </summary>
+          <div class="answer">
+            <code>any</code> disables type safety and allows any operation.
+            <code>unknown</code> is a safer top type: you must narrow or assert
+            before using it. Prefer <code>unknown</code> for untrusted values,
+            then apply type guards or schema validation.
+          </div>
+        </details>
+        <details class="qa" data-level="intermediate">
+          <summary>
+            <span class="badge">Intermediate</span>Interface vs type alias:
+            how do you choose?
+          </summary>
+          <div class="answer">
+            Both can model object shapes. Interfaces support declaration merging
+            and are often preferred for public object contracts and class
+            implementations. Type aliases are more flexible for unions,
+            intersections, tuples, and conditional types. In practice, choose
+            for readability and consistency, not ideology.
+          </div>
+        </details>
+        <details class="qa" data-level="advanced">
+          <summary>
+            <span class="badge">Advanced</span>Explain discriminated unions and
+            exhaustive checking.
+          </summary>
+          <div class="answer">
+            A discriminated union uses a shared literal field such as
+            <code>kind</code> to represent variants. Control-flow narrowing
+            picks the correct branch by checking that field. Exhaustive
+            <code>switch</code> handling plus <code>never</code> checks helps
+            ensure newly added variants are not silently ignored.
+          </div>
+        </details>
+        <details class="qa" data-level="advanced">
+          <summary>
+            <span class="badge">Advanced</span>How do generic constraints
+            improve API design?
+          </summary>
+          <div class="answer">
+            Generics preserve relationships between inputs and outputs, while
+            constraints like <code>T extends { id: string }</code> guarantee
+            required capabilities. This keeps APIs reusable without losing
+            correctness, and reduces unsafe casts in calling code.
+          </div>
+        </details>
+        <details class="qa" data-level="senior">
+          <summary>
+            <span class="badge">Senior</span>How would you migrate a large JS
+            codebase to TypeScript safely?
+          </summary>
+          <div class="answer">
+            Migrate incrementally: enable <code>allowJs</code>, start with
+            strict checks in leaf modules, define shared domain types, and gate
+            unsafe boundaries with runtime validation. Track
+            <code>any</code>-usage, CI type errors, and defect trends. Avoid a
+            single big-bang rewrite that blocks product delivery.
+          </div>
+        </details>
+        <details class="qa" data-level="senior">
+          <summary>
+            <span class="badge">Senior</span>Why can "type-safe" code still
+            fail in production?
+          </summary>
+          <div class="answer">
+            TypeScript types describe assumptions at compile time, but runtime
+            data can violate them. Network payload drift, feature flags,
+            malformed JSON, and environment differences can all break behavior.
+            Senior practice combines static typing with runtime schema checks,
+            observability, and defensive error handling.
+          </div>
+        </details>
+        <details class="qa" data-level="coding">
+          <summary>
+            <span class="badge">Coding</span>Implement a generic
+            <code>pluck</code> utility and explain type safety.
+          </summary>
+          <div class="answer">
+            <pre><code>function pluck&lt;T, K extends keyof T&gt;(items: T[], key: K): T[K][] {
+  return items.map((item) =&gt; item[key]);
+}</code></pre>
+            <p>
+              <code>K extends keyof T</code> restricts keys to valid property
+              names of <code>T</code>. The return type <code>T[K][]</code>
+              preserves the exact value type for that key, preventing invalid
+              property access at compile time.
+            </p>
+          </div>
+        </details>
+        <h3>Coding ladder</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Difficulty</th>
+              <th>Exercises</th>
+              <th>What interviewer tests</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Easy</td>
+              <td>Typed identity, simple interfaces, readonly DTOs</td>
+              <td>Basic annotations, inference, object modeling</td>
+            </tr>
+            <tr>
+              <td>Medium</td>
+              <td>
+                Generic helpers, discriminated union reducers, typed API
+                response models
+              </td>
+              <td>Narrowing, generic constraints, safety at boundaries</td>
+            </tr>
+            <tr>
+              <td>Hard</td>
+              <td>
+                Deep utility types, typed event emitter, conditional/mapped
+                transformations
+              </td>
+              <td>Type-level design, maintainability, trade-off reasoning</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="callout">
+          <b>Rapid revision:</b> Remember that types are erased at runtime;
+          master narrowing and discriminated unions; avoid casual
+          <code>any</code>; use generics to preserve relationships; and combine
+          TypeScript with runtime validation for external data.
+        </div>
+      </section>
+
+      <section id="react" class="chapter searchable">
             handled by the host runtime. When the stack is empty, the runtime
             drains the microtask queue—Promise reactions and
             <code>queueMicrotask</code>—before processing the next task such as
@@ -692,7 +980,6 @@ Source Code → Parse → AST → Bytecode / JIT Optimization
           nature.
         </div>
       </section>
-
       <section id="react" class="chapter searchable">
         <h2>4. React, Redux Toolkit, RTK Query & Zustand</h2>
         <div class="diagram">
