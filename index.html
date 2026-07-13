@@ -1244,13 +1244,13 @@ State/Props/Context/Store update
             phases.
           </summary>
           <div class="answer">
-            The event loop has multiple phases: timers, pending callbacks,
-            idle/prepare, poll, check, and close callbacks. Each phase has a
-            FIFO queue of callbacks. After the poll phase, the check phase runs
-            <code>setImmediate</code> callbacks. Microtasks (Promise reactions,
-            <code>queueMicrotask</code>) run after each callback and before the
-            next phase. If the poll queue is empty, the loop may block for I/O
-            or proceed to check/close phases.
+            The event loop has multiple phases: timers (setTimeout/setInterval),
+            pending callbacks (I/O callbacks deferred to the next loop), idle,
+            poll (I/O polling and executing callbacks), check (setImmediate),
+            and close callbacks. Microtasks (Promise reactions, queueMicrotask)
+            run after each phase before moving to the next. Understanding these
+            phases helps reason about callback ordering, timers, and I/O
+            behavior.
           </div>
         </details>
         <details class="qa" data-level="advanced">
@@ -1258,13 +1258,13 @@ State/Props/Context/Store update
             <span class="badge">Advanced</span>Streams and backpressure?
           </summary>
           <div class="answer">
-            Streams are abstractions for reading/writing data in chunks.
-            Backpressure occurs when the consumer cannot keep up with the
-            producer. Node.js streams implement a pull-based mechanism: the
-            readable stream signals when it is ready for more data, and the
-            writable stream can pause/resume based on its internal buffer.
-            Properly handling backpressure prevents memory bloat and ensures
-            smooth data flow.
+            Streams are abstractions for reading/writing data in chunks. They
+            can be readable, writable, or duplex. Backpressure occurs when the
+            consumer cannot keep up with the producer. Node.js streams signal
+            backpressure by returning <code>false</code> from
+            <code>write()</code> and pausing the readable stream until the
+            consumer drains. Properly handling backpressure prevents memory
+            bloat and ensures smooth data flow.
           </div>
         </details>
         <details class="qa" data-level="senior">
