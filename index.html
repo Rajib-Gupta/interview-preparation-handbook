@@ -1,81 +1,507 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Rajib Gupta — Ultimate Interview Handbook</title>
-<style>
-:root{--bg:#f6f7fb;--panel:#fff;--text:#172033;--muted:#657086;--accent:#4f46e5;--border:#e4e7ef;--code:#111827}
-body.dark{--bg:#0f1420;--panel:#171e2d;--text:#e8edf7;--muted:#a8b1c4;--accent:#8b83ff;--border:#2b3548;--code:#0b1020}
-*{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--text);font:15px/1.65 Inter,ui-sans-serif,system-ui,-apple-system,sans-serif}
-aside{position:fixed;left:0;top:0;bottom:0;width:280px;background:var(--panel);border-right:1px solid var(--border);padding:18px;overflow:auto;z-index:4}
-main{margin-left:280px;max-width:1180px;padding:28px 42px 80px}
-h1{font-size:38px;line-height:1.1;margin:.2em 0} h2{font-size:28px;border-bottom:1px solid var(--border);padding-bottom:10px;margin-top:55px} h3{margin-top:28px}
-a{color:var(--accent);text-decoration:none} .nav a{display:block;padding:7px 9px;border-radius:8px;color:var(--text)} .nav a:hover{background:var(--bg)}
-.toolbar{display:flex;gap:8px;flex-wrap:wrap;margin:16px 0} button,input,select,textarea{font:inherit;border:1px solid var(--border);background:var(--panel);color:var(--text);border-radius:8px;padding:8px 10px}
-button{cursor:pointer} #search{width:100%;margin:8px 0 12px} .hero{background:linear-gradient(135deg,var(--panel),var(--bg));border:1px solid var(--border);border-radius:18px;padding:28px}
-.chip{display:inline-block;background:var(--bg);border:1px solid var(--border);border-radius:999px;padding:4px 9px;margin:3px;font-size:13px}
-.card,.callout,.danger{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:16px;margin:12px 0} .callout{border-left:4px solid var(--accent)} .danger{border-left:4px solid #d97706}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}
-.qa{background:var(--panel);border:1px solid var(--border);border-radius:10px;margin:9px 0;overflow:hidden} .qa summary{cursor:pointer;padding:12px 14px;font-weight:650} .answer{padding:4px 16px 16px;color:var(--text)}
-.badge{font-size:11px;background:var(--bg);border:1px solid var(--border);border-radius:999px;padding:2px 7px;margin-right:8px;color:var(--muted)}
-pre{white-space:pre-wrap;background:var(--code);color:#e5e7eb;border-radius:10px;padding:15px;overflow:auto} code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
-table{width:100%;border-collapse:collapse;background:var(--panel);margin:14px 0} th,td{border:1px solid var(--border);padding:10px;vertical-align:top;text-align:left} th{background:var(--bg)}
-.progressbar{height:8px;background:var(--border);border-radius:9px;overflow:hidden} #progress{height:100%;width:0;background:var(--accent)}
-.notearea{width:100%;min-height:120px} .hidden{display:none!important} .polished{border-left:3px solid var(--accent);padding-left:16px}
-.flashcard{min-height:170px;display:flex;align-items:center;justify-content:center;text-align:center;font-size:18px;cursor:pointer}
-.small{font-size:13px;color:var(--muted)} .diagram{margin:14px 0}
-@media(max-width:850px){aside{position:static;width:auto;border-right:0}main{margin-left:0;padding:18px}.nav{display:none}h1{font-size:31px}}
-@media print{aside,.toolbar,#notes{display:none}main{margin:0;max-width:none}details{break-inside:avoid}details>summary{font-weight:bold}}
-</style></head>
-<body>
-<aside>
-<h3>Rajib's Handbook</h3>
-<input id="search" placeholder="Search topics, questions, skills…">
-<div class="progressbar"><div id="progress"></div></div><div class="small"><span id="progressText">0</span>% studied</div>
-<div class="toolbar"><button onclick="toggleDark()">Dark mode</button><button onclick="openAll()">Expand Q&A</button></div>
-<div class="nav">
-<a href="#resume-map">Resume Map</a><a href="#strategy">Preparation Strategy</a><a href="#javascript">JavaScript & TypeScript</a>
-<a href="#react">React & State</a><a href="#next">Next.js</a><a href="#node">Node.js & Express</a>
-<a href="#backend">Backend & Security</a><a href="#databases">Databases</a><a href="#system-design">System Design</a>
-<a href="#projects">Project Deep Dive</a><a href="#cross">Resume Cross-Examination</a><a href="#cloud">Cloud & DevOps</a>
-<a href="#ai">AI & LLM</a><a href="#dsa">DSA</a><a href="#behavioral">HR & Behavioral</a>
-<a href="#rapid">10-Minute Revision</a><a href="#flashcards">Flashcards</a><a href="#notes">My Notes</a>
-</div></aside>
-<main>
-<div class="hero searchable"><div class="small">PERSONALIZED FOR RAJIB GUPTA • 4.5+ YEARS • FULL STACK PRODUCT ENGINEER</div>
-<h1>Ultimate Software Engineering Interview Handbook</h1>
-<p>A resume-driven study platform for product companies such as Google, Microsoft, Amazon, Atlassian and Uber, and service/consulting companies such as Accenture, TCS, Infosys, Cognizant, Capgemini and Deloitte.</p>
-<div class="callout"><b>How to use this handbook:</b> Do not memorize paragraphs. Explain concepts aloud, draw architectures from memory, code without autocomplete, and attach every resume claim to exact numbers, decisions, failures, and trade-offs. No finite handbook can guarantee 95% of every interview worldwide, but mastering the material and drills here gives you broad coverage aligned to your actual resume.</div>
-</div>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Rajib Gupta — Ultimate Interview Handbook</title>
+    <style>
+      :root {
+        --bg: #f6f7fb;
+        --panel: #fff;
+        --text: #172033;
+        --muted: #657086;
+        --accent: #4f46e5;
+        --border: #e4e7ef;
+        --code: #111827;
+      }
+      body.dark {
+        --bg: #0f1420;
+        --panel: #171e2d;
+        --text: #e8edf7;
+        --muted: #a8b1c4;
+        --accent: #8b83ff;
+        --border: #2b3548;
+        --code: #0b1020;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--text);
+        font:
+          15px/1.65 Inter,
+          ui-sans-serif,
+          system-ui,
+          -apple-system,
+          sans-serif;
+      }
+      aside {
+        position: fixed;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 280px;
+        background: var(--panel);
+        border-right: 1px solid var(--border);
+        padding: 18px;
+        overflow: auto;
+        z-index: 4;
+      }
+      main {
+        margin-left: 280px;
+        max-width: 1180px;
+        padding: 28px 42px 80px;
+      }
+      h1 {
+        font-size: 38px;
+        line-height: 1.1;
+        margin: 0.2em 0;
+      }
+      h2 {
+        font-size: 28px;
+        border-bottom: 1px solid var(--border);
+        padding-bottom: 10px;
+        margin-top: 55px;
+      }
+      h3 {
+        margin-top: 28px;
+      }
+      a {
+        color: var(--accent);
+        text-decoration: none;
+      }
+      .nav a {
+        display: block;
+        padding: 7px 9px;
+        border-radius: 8px;
+        color: var(--text);
+      }
+      .nav a:hover {
+        background: var(--bg);
+      }
+      .toolbar {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        margin: 16px 0;
+      }
+      button,
+      input,
+      select,
+      textarea {
+        font: inherit;
+        border: 1px solid var(--border);
+        background: var(--panel);
+        color: var(--text);
+        border-radius: 8px;
+        padding: 8px 10px;
+      }
+      button {
+        cursor: pointer;
+      }
+      #search {
+        width: 100%;
+        margin: 8px 0 12px;
+      }
+      .hero {
+        background: linear-gradient(135deg, var(--panel), var(--bg));
+        border: 1px solid var(--border);
+        border-radius: 18px;
+        padding: 28px;
+      }
+      .chip {
+        display: inline-block;
+        background: var(--bg);
+        border: 1px solid var(--border);
+        border-radius: 999px;
+        padding: 4px 9px;
+        margin: 3px;
+        font-size: 13px;
+      }
+      .card,
+      .callout,
+      .danger {
+        background: var(--panel);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 16px;
+        margin: 12px 0;
+      }
+      .callout {
+        border-left: 4px solid var(--accent);
+      }
+      .danger {
+        border-left: 4px solid #d97706;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 12px;
+      }
+      .qa {
+        background: var(--panel);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        margin: 9px 0;
+        overflow: hidden;
+      }
+      .qa summary {
+        cursor: pointer;
+        padding: 12px 14px;
+        font-weight: 650;
+      }
+      .answer {
+        padding: 4px 16px 16px;
+        color: var(--text);
+      }
+      .badge {
+        font-size: 11px;
+        background: var(--bg);
+        border: 1px solid var(--border);
+        border-radius: 999px;
+        padding: 2px 7px;
+        margin-right: 8px;
+        color: var(--muted);
+      }
+      pre {
+        white-space: pre-wrap;
+        background: var(--code);
+        color: #e5e7eb;
+        border-radius: 10px;
+        padding: 15px;
+        overflow: auto;
+      }
+      code {
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        background: var(--panel);
+        margin: 14px 0;
+      }
+      th,
+      td {
+        border: 1px solid var(--border);
+        padding: 10px;
+        vertical-align: top;
+        text-align: left;
+      }
+      th {
+        background: var(--bg);
+      }
+      .progressbar {
+        height: 8px;
+        background: var(--border);
+        border-radius: 9px;
+        overflow: hidden;
+      }
+      #progress {
+        height: 100%;
+        width: 0;
+        background: var(--accent);
+      }
+      .notearea {
+        width: 100%;
+        min-height: 120px;
+      }
+      .hidden {
+        display: none !important;
+      }
+      .polished {
+        border-left: 3px solid var(--accent);
+        padding-left: 16px;
+      }
+      .flashcard {
+        min-height: 170px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        font-size: 18px;
+        cursor: pointer;
+      }
+      .small {
+        font-size: 13px;
+        color: var(--muted);
+      }
+      .diagram {
+        margin: 14px 0;
+      }
+      @media (max-width: 850px) {
+        aside {
+          position: static;
+          width: auto;
+          border-right: 0;
+        }
+        main {
+          margin-left: 0;
+          padding: 18px;
+        }
+        .nav {
+          display: none;
+        }
+        h1 {
+          font-size: 31px;
+        }
+      }
+      @media print {
+        aside,
+        .toolbar,
+        #notes {
+          display: none;
+        }
+        main {
+          margin: 0;
+          max-width: none;
+        }
+        details {
+          break-inside: avoid;
+        }
+        details > summary {
+          font-weight: bold;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <aside>
+      <h3>Rajib's Handbook</h3>
+      <input id="search" placeholder="Search topics, questions, skills…" />
+      <div class="progressbar"><div id="progress"></div></div>
+      <div class="small"><span id="progressText">0</span>% studied</div>
+      <div class="toolbar">
+        <button onclick="toggleDark()">Dark mode</button
+        ><button onclick="openAll()">Expand Q&A</button>
+      </div>
+      <div class="nav">
+        <a href="#resume-map">Resume Map</a
+        ><a href="#strategy">Preparation Strategy</a
+        ><a href="#javascript">JavaScript & TypeScript</a>
+        <a href="#react">React & State</a><a href="#next">Next.js</a
+        ><a href="#node">Node.js & Express</a>
+        <a href="#backend">Backend & Security</a
+        ><a href="#databases">Databases</a
+        ><a href="#system-design">System Design</a>
+        <a href="#projects">Project Deep Dive</a
+        ><a href="#cross">Resume Cross-Examination</a
+        ><a href="#cloud">Cloud & DevOps</a> <a href="#ai">AI & LLM</a
+        ><a href="#dsa">DSA</a><a href="#behavioral">HR & Behavioral</a>
+        <a href="#rapid">10-Minute Revision</a
+        ><a href="#flashcards">Flashcards</a><a href="#notes">My Notes</a>
+      </div>
+    </aside>
+    <main>
+      <div class="hero searchable">
+        <div class="small">
+          PERSONALIZED FOR RAJIB GUPTA • 4.5+ YEARS • FULL STACK PRODUCT
+          ENGINEER
+        </div>
+        <h1>Ultimate Software Engineering Interview Handbook</h1>
+        <p>
+          A resume-driven study platform for product companies such as Google,
+          Microsoft, Amazon, Atlassian and Uber, and service/consulting
+          companies such as Accenture, TCS, Infosys, Cognizant, Capgemini and
+          Deloitte.
+        </p>
+        <div class="callout">
+          <b>How to use this handbook:</b> Do not memorize paragraphs. Explain
+          concepts aloud, draw architectures from memory, code without
+          autocomplete, and attach every resume claim to exact numbers,
+          decisions, failures, and trade-offs. No finite handbook can guarantee
+          95% of every interview worldwide, but mastering the material and
+          drills here gives you broad coverage aligned to your actual resume.
+        </div>
+      </div>
 
-<section id="resume-map" class="chapter searchable"><h2>1. Resume Technology & Risk Map</h2><h3>Languages</h3><span class="chip">JavaScript</span><span class="chip">TypeScript</span><span class="chip">Python</span><h3>Frontend</h3><span class="chip">React.js</span><span class="chip">Next.js</span><span class="chip">Redux Toolkit</span><span class="chip">RTK Query</span><span class="chip">Zustand</span><span class="chip">Angular</span><h3>Backend</h3><span class="chip">Node.js</span><span class="chip">Express</span><span class="chip">REST APIs</span><span class="chip">Webhooks</span><span class="chip">Background Jobs</span><span class="chip">Cron Jobs</span><span class="chip">Scheduled Workflows</span><h3>Databases</h3><span class="chip">PostgreSQL</span><span class="chip">MySQL</span><span class="chip">MongoDB</span><span class="chip">Schema Design</span><span class="chip">Indexing</span><span class="chip">Query Optimization</span><span class="chip">Data Pipelines</span><h3>Cloud &amp; DevOps</h3><span class="chip">AWS ECS</span><span class="chip">AWS Lambda</span><span class="chip">AWS Step Functions</span><span class="chip">Microsoft Azure</span><span class="chip">GCP</span><span class="chip">Docker</span><span class="chip">Kubernetes</span><span class="chip">CI/CD</span><span class="chip">GitHub Actions</span><span class="chip">Nginx</span><h3>Architecture</h3><span class="chip">Event-Driven Architecture</span><span class="chip">Message Queues</span><span class="chip">Data Ingestion</span><span class="chip">Caching</span><span class="chip">Replication</span><span class="chip">Microservices</span><span class="chip">Monoliths</span><h3>AI &amp; LLM</h3><span class="chip">LLM API Integrations</span><span class="chip">AI Agents</span><span class="chip">Prompt Engineering</span><span class="chip">Workflow Automation</span><span class="chip">Structured Outputs</span><span class="chip">Cursor</span><span class="chip">Claude Code</span><span class="chip">GitHub Copilot</span><span class="chip">Codex</span><h3>Observability</h3><span class="chip">Sentry</span><span class="chip">Error Tracking</span><span class="chip">Performance Monitoring</span><span class="chip">Logging</span><span class="chip">Alerting</span><h3>Security</h3><span class="chip">JWT</span><span class="chip">OAuth</span><span class="chip">RBAC</span><span class="chip">Cookies</span><span class="chip">Sessions</span><span class="chip">CORS</span><span class="chip">CSRF</span><span class="chip">XSS</span><span class="chip">SQL Injection</span>
-<h3>Highest-priority interview risks</h3>
-<ol><li><b>Quantified claims:</b> ~25% latency improvement, 70% AI-assisted acceleration, 15% bug reduction.</li>
-<li><b>Broad cloud list:</b> AWS ECS/Lambda/Step Functions, Azure, GCP. Expect “what did you personally deploy?”</li>
-<li><b>Queue/event claims:</b> Be ready to name actual technology, delivery semantics, retry policy, DLQ, ordering and idempotency.</li>
-<li><b>Fintech + credit bureaus:</b> Expect security, PII, auditability, provider failure, rate limits and compliance-boundary questions.</li>
-<li><b>LLM-assisted credit scoring:</b> Precisely define the LLM's role and safeguards.</li></ol></section>
+      <section id="resume-map" class="chapter searchable">
+        <h2>1. Resume Technology & Risk Map</h2>
+        <h3>Languages</h3>
+        <span class="chip">JavaScript</span><span class="chip">TypeScript</span
+        ><span class="chip">Python</span>
+        <h3>Frontend</h3>
+        <span class="chip">React.js</span><span class="chip">Next.js</span
+        ><span class="chip">Redux Toolkit</span
+        ><span class="chip">RTK Query</span><span class="chip">Zustand</span
+        ><span class="chip">Angular</span>
+        <h3>Backend</h3>
+        <span class="chip">Node.js</span><span class="chip">Express</span
+        ><span class="chip">REST APIs</span><span class="chip">Webhooks</span
+        ><span class="chip">Background Jobs</span
+        ><span class="chip">Cron Jobs</span
+        ><span class="chip">Scheduled Workflows</span>
+        <h3>Databases</h3>
+        <span class="chip">PostgreSQL</span><span class="chip">MySQL</span
+        ><span class="chip">MongoDB</span><span class="chip">Schema Design</span
+        ><span class="chip">Indexing</span
+        ><span class="chip">Query Optimization</span
+        ><span class="chip">Data Pipelines</span>
+        <h3>Cloud &amp; DevOps</h3>
+        <span class="chip">AWS ECS</span><span class="chip">AWS Lambda</span
+        ><span class="chip">AWS Step Functions</span
+        ><span class="chip">Microsoft Azure</span><span class="chip">GCP</span
+        ><span class="chip">Docker</span><span class="chip">Kubernetes</span
+        ><span class="chip">CI/CD</span><span class="chip">GitHub Actions</span
+        ><span class="chip">Nginx</span>
+        <h3>Architecture</h3>
+        <span class="chip">Event-Driven Architecture</span
+        ><span class="chip">Message Queues</span
+        ><span class="chip">Data Ingestion</span
+        ><span class="chip">Caching</span><span class="chip">Replication</span
+        ><span class="chip">Microservices</span
+        ><span class="chip">Monoliths</span>
+        <h3>AI &amp; LLM</h3>
+        <span class="chip">LLM API Integrations</span
+        ><span class="chip">AI Agents</span
+        ><span class="chip">Prompt Engineering</span
+        ><span class="chip">Workflow Automation</span
+        ><span class="chip">Structured Outputs</span
+        ><span class="chip">Cursor</span><span class="chip">Claude Code</span
+        ><span class="chip">GitHub Copilot</span><span class="chip">Codex</span>
+        <h3>Observability</h3>
+        <span class="chip">Sentry</span><span class="chip">Error Tracking</span
+        ><span class="chip">Performance Monitoring</span
+        ><span class="chip">Logging</span><span class="chip">Alerting</span>
+        <h3>Security</h3>
+        <span class="chip">JWT</span><span class="chip">OAuth</span
+        ><span class="chip">RBAC</span><span class="chip">Cookies</span
+        ><span class="chip">Sessions</span><span class="chip">CORS</span
+        ><span class="chip">CSRF</span><span class="chip">XSS</span
+        ><span class="chip">SQL Injection</span>
+        <h3>Highest-priority interview risks</h3>
+        <ol>
+          <li>
+            <b>Quantified claims:</b> ~25% latency improvement, 70% AI-assisted
+            acceleration, 15% bug reduction.
+          </li>
+          <li>
+            <b>Broad cloud list:</b> AWS ECS/Lambda/Step Functions, Azure, GCP.
+            Expect “what did you personally deploy?”
+          </li>
+          <li>
+            <b>Queue/event claims:</b> Be ready to name actual technology,
+            delivery semantics, retry policy, DLQ, ordering and idempotency.
+          </li>
+          <li>
+            <b>Fintech + credit bureaus:</b> Expect security, PII, auditability,
+            provider failure, rate limits and compliance-boundary questions.
+          </li>
+          <li>
+            <b>LLM-assisted credit scoring:</b> Precisely define the LLM's role
+            and safeguards.
+          </li>
+        </ol>
+      </section>
 
-<section id="strategy" class="chapter searchable"><h2>2. Preparation Strategy & Company Expectations</h2>
-<table><thead><tr><th>Phase</th><th>Focus</th><th>Exit criteria</th></tr></thead><tbody>
-<tr><td>Weeks 1–2</td><td>JavaScript, TypeScript, React fundamentals + resume metrics</td><td>Can answer core questions aloud without notes</td></tr>
-<tr><td>Weeks 3–4</td><td>Node, API security, PostgreSQL/MongoDB, async workflows</td><td>Can design and debug a production API</td></tr>
-<tr><td>Weeks 5–6</td><td>DSA patterns: arrays through trees/graphs</td><td>2 medium problems/day with clean explanations</td></tr>
-<tr><td>Weeks 7–8</td><td>System design + project deep dives</td><td>45-minute design with requirements, trade-offs, failure modes</td></tr>
-<tr><td>Weeks 9–10</td><td>Advanced DSA/DP + mocks + behavioral</td><td>3 timed mocks/week; maintain mistake log</td></tr>
-<tr><td>Ongoing</td><td>Spaced repetition and company-specific prep</td><td>Weak areas revisited at 1, 3, 7, 14-day intervals</td></tr>
-</tbody></table>
-<div class="callout"><b>Recommended daily split around a full-time job:</b> 60 minutes DSA, 45 minutes stack/system design, 15 minutes verbal resume drill. On weekends, add one 45–60 minute mock interview and one project/system-design deep dive.</div>
+      <section id="strategy" class="chapter searchable">
+        <h2>2. Preparation Strategy & Company Expectations</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Phase</th>
+              <th>Focus</th>
+              <th>Exit criteria</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Weeks 1–2</td>
+              <td>
+                JavaScript, TypeScript, React fundamentals + resume metrics
+              </td>
+              <td>Can answer core questions aloud without notes</td>
+            </tr>
+            <tr>
+              <td>Weeks 3–4</td>
+              <td>Node, API security, PostgreSQL/MongoDB, async workflows</td>
+              <td>Can design and debug a production API</td>
+            </tr>
+            <tr>
+              <td>Weeks 5–6</td>
+              <td>DSA patterns: arrays through trees/graphs</td>
+              <td>2 medium problems/day with clean explanations</td>
+            </tr>
+            <tr>
+              <td>Weeks 7–8</td>
+              <td>System design + project deep dives</td>
+              <td>
+                45-minute design with requirements, trade-offs, failure modes
+              </td>
+            </tr>
+            <tr>
+              <td>Weeks 9–10</td>
+              <td>Advanced DSA/DP + mocks + behavioral</td>
+              <td>3 timed mocks/week; maintain mistake log</td>
+            </tr>
+            <tr>
+              <td>Ongoing</td>
+              <td>Spaced repetition and company-specific prep</td>
+              <td>Weak areas revisited at 1, 3, 7, 14-day intervals</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="callout">
+          <b>Recommended daily split around a full-time job:</b> 60 minutes DSA,
+          45 minutes stack/system design, 15 minutes verbal resume drill. On
+          weekends, add one 45–60 minute mock interview and one
+          project/system-design deep dive.
+        </div>
 
-<h3>Company-style differences</h3>
-<table><thead><tr><th>Interview type</th><th>Likely emphasis</th><th>Your preparation</th></tr></thead><tbody>
-<tr><td>Google/Uber-style product</td><td>DSA depth, problem solving, system design, behavioral evidence</td><td>Medium/hard DSA, scalable architecture, precise trade-offs</td></tr>
-<tr><td>Amazon-style</td><td>DSA/design plus deep behavioral ownership</td><td>STAR stories with metrics, failures, customer impact</td></tr>
-<tr><td>Microsoft/Atlassian-style</td><td>DSA, practical engineering, design, collaboration</td><td>Clean code, debugging, API/data modeling, teamwork</td></tr>
-<tr><td>Service/consulting companies</td><td>Resume stack, JavaScript/React/Node, SQL, project questions, practical coding</td><td>Broad fundamentals and confident project walkthroughs</td></tr>
-</tbody></table></section>
+        <h3>Company-style differences</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Interview type</th>
+              <th>Likely emphasis</th>
+              <th>Your preparation</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Google/Uber-style product</td>
+              <td>
+                DSA depth, problem solving, system design, behavioral evidence
+              </td>
+              <td>
+                Medium/hard DSA, scalable architecture, precise trade-offs
+              </td>
+            </tr>
+            <tr>
+              <td>Amazon-style</td>
+              <td>DSA/design plus deep behavioral ownership</td>
+              <td>STAR stories with metrics, failures, customer impact</td>
+            </tr>
+            <tr>
+              <td>Microsoft/Atlassian-style</td>
+              <td>DSA, practical engineering, design, collaboration</td>
+              <td>Clean code, debugging, API/data modeling, teamwork</td>
+            </tr>
+            <tr>
+              <td>Service/consulting companies</td>
+              <td>
+                Resume stack, JavaScript/React/Node, SQL, project questions,
+                practical coding
+              </td>
+              <td>Broad fundamentals and confident project walkthroughs</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
 
-<section id="javascript" class="chapter searchable"><h2>3. JavaScript & TypeScript — Beginner to Senior</h2>
-<h3>Core mental model</h3><p>JavaScript is a garbage-collected, prototype-based, dynamically typed language standardized by ECMAScript. The language itself defines execution semantics; browsers and Node.js provide host APIs and event-loop integration.</p>
-<div class="diagram"><pre>Source Code → Parse → AST → Bytecode / JIT Optimization
+      <section id="javascript" class="chapter searchable">
+        <h2>3. JavaScript & TypeScript — Beginner to Senior</h2>
+        <h3>Core mental model</h3>
+        <p>
+          JavaScript is a garbage-collected, prototype-based, dynamically typed
+          language standardized by ECMAScript. The language itself defines
+          execution semantics; browsers and Node.js provide host APIs and
+          event-loop integration.
+        </p>
+        <div class="diagram">
+          <pre>
+Source Code → Parse → AST → Bytecode / JIT Optimization
                       │
                       ▼
               Execution Contexts
@@ -85,26 +511,193 @@ table{width:100%;border-collapse:collapse;background:var(--panel);margin:14px 0}
         Host APIs / libuv / browser runtime
                       │
            Task queues + Microtasks
-                      └────► Event Loop ────► Call Stack</pre></div>
-<h3>Must-master syllabus</h3>
-<p>Primitive/reference semantics; coercion; equality; scope; lexical environment; TDZ; hoisting; closures; <code>this</code>; call/apply/bind; prototypes; classes; property descriptors; iterables/iterators; generators; promises; async/await; event loop; modules; errors; memory/GC; functional programming; OOP; immutability; currying; composition; debounce/throttle; deep clone limitations; TypeScript structural typing, unions, intersections, generics, utility types, narrowing, type guards, <code>unknown</code> vs <code>any</code>, <code>never</code>, variance basics, declaration files.</p>
-<details class="qa" data-level="beginner"><summary><span class="badge">Beginner</span>What is an execution context and what is stored inside it?</summary><div class="answer">An execution context is the runtime environment in which JavaScript code executes. It contains the variable environment, lexical environment, scope chain, and <code>this</code> binding. The global context is created first; each function call creates a function execution context. Contexts are pushed onto the call stack. During creation, declarations are registered; during execution, statements run.</div></details><details class="qa" data-level="intermediate"><summary><span class="badge">Intermediate</span>Explain hoisting precisely. Are let and const not hoisted?</summary><div class="answer">All declarations are processed before normal execution. <code>var</code> is initialized to <code>undefined</code>; function declarations are initialized with their function value. <code>let</code>, <code>const</code>, and <code>class</code> are also hoisted but remain uninitialized in the Temporal Dead Zone until declaration evaluation. Access during the TDZ throws <code>ReferenceError</code>.</div></details><details class="qa" data-level="intermediate"><summary><span class="badge">Intermediate</span>What is a closure, and where have you used one in production?</summary><div class="answer">A closure is a function together with access to the lexical environment in which it was created, even after the outer function returns. Production uses include factory functions, memoization, private state, event handlers, custom React hooks, debouncing, middleware configuration, and callbacks. Mention the memory-retention trade-off: captured objects remain reachable while the closure remains reachable.</div></details><details class="qa" data-level="advanced"><summary><span class="badge">Advanced</span>Explain the event loop including microtasks and macrotasks.</summary><div class="answer">Synchronous JavaScript runs on the call stack. Async operations are handled by the host runtime. When the stack is empty, the runtime drains the microtask queue—Promise reactions and <code>queueMicrotask</code>—before processing the next task such as a timer or I/O callback. In browsers, rendering opportunities occur between tasks. A recursively growing microtask chain can starve timers and rendering.</div></details><details class="qa" data-level="advanced"><summary><span class="badge">Advanced</span>How does prototypal inheritance work internally?</summary><div class="answer">Objects have an internal <code>[[Prototype]]</code> link. Property lookup checks the object first and then follows the prototype chain until a property is found or the chain ends at <code>null</code>. Constructor functions expose a <code>prototype</code> object used as the prototype of instances created with <code>new</code>. ES classes are syntax over prototype-based behavior, with additional semantics such as strict mode and private fields.</div></details><details class="qa" data-level="intermediate"><summary><span class="badge">Intermediate</span>Promise.all vs allSettled vs race vs any?</summary><div class="answer"><code>Promise.all</code> fulfills when all fulfill and rejects on the first rejection. <code>allSettled</code> waits for every input and returns statuses. <code>race</code> settles with the first settled input. <code>any</code> fulfills with the first fulfillment and rejects with <code>AggregateError</code> only if all reject. Choose based on failure semantics, not convenience.</div></details><details class="qa" data-level="senior"><summary><span class="badge">Senior</span>What can cause memory leaks in a JavaScript application?</summary><div class="answer">Unremoved event listeners, forgotten timers, unbounded caches, detached DOM trees, accidental globals, long-lived closures retaining large objects, unresolved subscriptions, and queues that grow without backpressure. Diagnose with heap snapshots, allocation timelines, retained-size analysis, and production memory metrics.</div></details><details class="qa" data-level="coding"><summary><span class="badge">Coding</span>Implement debounce and explain the closure.</summary><div class="answer"><pre><code>function debounce(fn, delay) {
+                      └────► Event Loop ────► Call Stack</pre
+          >
+        </div>
+        <h3>Must-master syllabus</h3>
+        <p>
+          Primitive/reference semantics; coercion; equality; scope; lexical
+          environment; TDZ; hoisting; closures; <code>this</code>;
+          call/apply/bind; prototypes; classes; property descriptors;
+          iterables/iterators; generators; promises; async/await; event loop;
+          modules; errors; memory/GC; functional programming; OOP; immutability;
+          currying; composition; debounce/throttle; deep clone limitations;
+          TypeScript structural typing, unions, intersections, generics, utility
+          types, narrowing, type guards, <code>unknown</code> vs
+          <code>any</code>, <code>never</code>, variance basics, declaration
+          files.
+        </p>
+        <details class="qa" data-level="beginner">
+          <summary>
+            <span class="badge">Beginner</span>What is an execution context and
+            what is stored inside it?
+          </summary>
+          <div class="answer">
+            An execution context is the runtime environment in which JavaScript
+            code executes. It contains the variable environment, lexical
+            environment, scope chain, and <code>this</code> binding. The global
+            context is created first; each function call creates a function
+            execution context. Contexts are pushed onto the call stack. During
+            creation, declarations are registered; during execution, statements
+            run.
+          </div>
+        </details>
+        <details class="qa" data-level="intermediate">
+          <summary>
+            <span class="badge">Intermediate</span>Explain hoisting precisely.
+            Are let and const not hoisted?
+          </summary>
+          <div class="answer">
+            All declarations are processed before normal execution.
+            <code>var</code> is initialized to <code>undefined</code>; function
+            declarations are initialized with their function value.
+            <code>let</code>, <code>const</code>, and <code>class</code> are
+            also hoisted but remain uninitialized in the Temporal Dead Zone
+            until declaration evaluation. Access during the TDZ throws
+            <code>ReferenceError</code>.
+          </div>
+        </details>
+        <details class="qa" data-level="intermediate">
+          <summary>
+            <span class="badge">Intermediate</span>What is a closure, and where
+            have you used one in production?
+          </summary>
+          <div class="answer">
+            A closure is a function together with access to the lexical
+            environment in which it was created, even after the outer function
+            returns. Production uses include factory functions, memoization,
+            private state, event handlers, custom React hooks, debouncing,
+            middleware configuration, and callbacks. Mention the
+            memory-retention trade-off: captured objects remain reachable while
+            the closure remains reachable.
+          </div>
+        </details>
+        <details class="qa" data-level="advanced">
+          <summary>
+            <span class="badge">Advanced</span>Explain the event loop including
+            microtasks and macrotasks.
+          </summary>
+          <div class="answer">
+            Synchronous JavaScript runs on the call stack. Async operations are
+            handled by the host runtime. When the stack is empty, the runtime
+            drains the microtask queue—Promise reactions and
+            <code>queueMicrotask</code>—before processing the next task such as
+            a timer or I/O callback. In browsers, rendering opportunities occur
+            between tasks. A recursively growing microtask chain can starve
+            timers and rendering.
+          </div>
+        </details>
+        <details class="qa" data-level="advanced">
+          <summary>
+            <span class="badge">Advanced</span>How does prototypal inheritance
+            work internally?
+          </summary>
+          <div class="answer">
+            Objects have an internal <code>[[Prototype]]</code> link. Property
+            lookup checks the object first and then follows the prototype chain
+            until a property is found or the chain ends at <code>null</code>.
+            Constructor functions expose a <code>prototype</code> object used as
+            the prototype of instances created with <code>new</code>. ES classes
+            are syntax over prototype-based behavior, with additional semantics
+            such as strict mode and private fields.
+          </div>
+        </details>
+        <details class="qa" data-level="intermediate">
+          <summary>
+            <span class="badge">Intermediate</span>Promise.all vs allSettled vs
+            race vs any?
+          </summary>
+          <div class="answer">
+            <code>Promise.all</code> fulfills when all fulfill and rejects on
+            the first rejection. <code>allSettled</code> waits for every input
+            and returns statuses. <code>race</code> settles with the first
+            settled input. <code>any</code> fulfills with the first fulfillment
+            and rejects with <code>AggregateError</code> only if all reject.
+            Choose based on failure semantics, not convenience.
+          </div>
+        </details>
+        <details class="qa" data-level="senior">
+          <summary>
+            <span class="badge">Senior</span>What can cause memory leaks in a
+            JavaScript application?
+          </summary>
+          <div class="answer">
+            Unremoved event listeners, forgotten timers, unbounded caches,
+            detached DOM trees, accidental globals, long-lived closures
+            retaining large objects, unresolved subscriptions, and queues that
+            grow without backpressure. Diagnose with heap snapshots, allocation
+            timelines, retained-size analysis, and production memory metrics.
+          </div>
+        </details>
+        <details class="qa" data-level="coding">
+          <summary>
+            <span class="badge">Coding</span>Implement debounce and explain the
+            closure.
+          </summary>
+          <div class="answer">
+            <pre><code>function debounce(fn, delay) {
   let timer;
   return function (...args) {
     clearTimeout(timer);
     timer = setTimeout(() => fn.apply(this, args), delay);
   };
-}</code></pre><p>The returned function closes over <code>timer</code>. Each call resets the timer, so only the latest invocation executes after inactivity. Time O(1) per call; auxiliary space O(1), excluding captured arguments.</p></div></details>
-<h3>Coding ladder</h3>
-<table><thead><tr><th>Difficulty</th><th>Exercises</th><th>What interviewer tests</th></tr></thead><tbody>
-<tr><td>Easy</td><td>Flatten one level, frequency map, chunk array, unique values</td><td>Syntax, edge cases, complexity</td></tr>
-<tr><td>Medium</td><td>Debounce, throttle, Promise.all polyfill, memoize, deep object access</td><td>Closures, async semantics, API design</td></tr>
-<tr><td>Hard</td><td>Concurrency limiter, event emitter, cancellable task pool, deep clone with cycles</td><td>State machines, scheduling, robustness</td></tr>
-</tbody></table>
-<div class="callout"><b>Rapid revision:</b> Memorize microtask ordering, TDZ, closure definition, <code>this</code> rules, prototype lookup, Promise combinators, shallow vs deep copy, and TypeScript's compile-time-only nature.</div></section>
+}</code></pre>
+            <p>
+              The returned function closes over <code>timer</code>. Each call
+              resets the timer, so only the latest invocation executes after
+              inactivity. Time O(1) per call; auxiliary space O(1), excluding
+              captured arguments.
+            </p>
+          </div>
+        </details>
+        <h3>Coding ladder</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Difficulty</th>
+              <th>Exercises</th>
+              <th>What interviewer tests</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Easy</td>
+              <td>
+                Flatten one level, frequency map, chunk array, unique values
+              </td>
+              <td>Syntax, edge cases, complexity</td>
+            </tr>
+            <tr>
+              <td>Medium</td>
+              <td>
+                Debounce, throttle, Promise.all polyfill, memoize, deep object
+                access
+              </td>
+              <td>Closures, async semantics, API design</td>
+            </tr>
+            <tr>
+              <td>Hard</td>
+              <td>
+                Concurrency limiter, event emitter, cancellable task pool, deep
+                clone with cycles
+              </td>
+              <td>State machines, scheduling, robustness</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="callout">
+          <b>Rapid revision:</b> Memorize microtask ordering, TDZ, closure
+          definition, <code>this</code> rules, prototype lookup, Promise
+          combinators, shallow vs deep copy, and TypeScript's compile-time-only
+          nature.
+        </div>
+      </section>
 
-<section id="react" class="chapter searchable"><h2>4. React, Redux Toolkit, RTK Query & Zustand</h2>
-<div class="diagram"><pre>State/Props/Context/Store update
+      <section id="react" class="chapter searchable">
+        <h2>4. React, Redux Toolkit, RTK Query & Zustand</h2>
+        <div class="diagram">
+          <pre>
+State/Props/Context/Store update
             │
             ▼
        Render Phase
@@ -120,44 +713,549 @@ table{width:100%;border-collapse:collapse;background:var(--panel);margin:14px 0}
             ▼
         Browser Paint
             │
-     Effects as scheduled</pre></div>
-<p><b>Must master:</b> component model, JSX, props/state, controlled inputs, lifting state, reconciliation, keys, Fiber, render/commit phases, hooks rules, useState batching, effects and cleanup, stale closures, refs, context, reducers, custom hooks, memoization, error boundaries, lazy/Suspense, transitions, profiling, virtualization, accessibility, forms, testing, SSR/hydration, Server/Client Components.</p>
-<details class="qa" data-level="intermediate"><summary><span class="badge">Intermediate</span>Virtual DOM vs reconciliation vs Fiber—what is the difference?</summary><div class="answer">The virtual DOM is the in-memory representation of UI elements. Reconciliation is React's process for deciding what changed between renders. Fiber is the internal architecture and work-unit data structure that enables interruptible rendering, priorities, scheduling, and concurrent features. They are related but not synonyms.</div></details><details class="qa" data-level="intermediate"><summary><span class="badge">Intermediate</span>What causes a React component to render?</summary><div class="answer">Its state changes, its parent renders, a consumed context value changes, or an external store subscription signals an update. A render does not necessarily mean DOM mutation; React reconciles the output and commits only required changes. <code>React.memo</code> can skip parent-driven renders when props are shallowly equal, but local state and context can still trigger rendering.</div></details><details class="qa" data-level="intermediate"><summary><span class="badge">Intermediate</span>useMemo vs useCallback vs React.memo?</summary><div class="answer"><code>useMemo</code> caches a computed value, <code>useCallback</code> caches a function reference, and <code>React.memo</code> can skip rendering a component when props compare equal. Memoization has overhead and should target measured expensive work or reference-stability requirements, not be applied everywhere.</div></details><details class="qa" data-level="advanced"><summary><span class="badge">Advanced</span>Why are keys important? Why is array index often dangerous?</summary><div class="answer">Keys identify sibling elements across renders. Stable keys let React preserve component identity and state. Index keys become incorrect when items are inserted, deleted, sorted, or filtered because state may attach to the wrong logical item. Index is acceptable for static lists that never reorder or change identity.</div></details><details class="qa" data-level="senior"><summary><span class="badge">Senior</span>Redux Toolkit vs Context vs Zustand—how do you choose?</summary><div class="answer">Context is best for relatively low-frequency cross-tree values such as theme or authenticated user metadata. Redux Toolkit is appropriate for complex shared client state requiring predictable transitions, middleware, DevTools, normalization, and large-team conventions. Zustand offers a smaller API and selective subscriptions for simpler global client state. Server-state fetching should usually use RTK Query, TanStack Query, or framework caching rather than hand-built global state.</div></details><details class="qa" data-level="advanced"><summary><span class="badge">Advanced</span>Explain RTK Query cache invalidation.</summary><div class="answer">Endpoints can declare tags with <code>providesTags</code>; mutations declare <code>invalidatesTags</code>. Invalidating an active query's tag triggers refetching. Cache entries are keyed by endpoint plus serialized arguments. Good tag design balances correctness with avoiding broad refetches.</div></details><details class="qa" data-level="senior"><summary><span class="badge">Senior</span>How would you diagnose a slow React page?</summary><div class="answer">Measure first: React Profiler, browser Performance panel, Web Vitals, network waterfall, bundle analyzer. Separate network latency, JavaScript parse/execute time, render cost, layout/paint, and memory. Then optimize the actual bottleneck using code splitting, virtualization, stable props, selective subscriptions, memoization, caching, image optimization, or server rendering.</div></details><details class="qa" data-level="coding"><summary><span class="badge">Coding</span>Build a production-grade useFetch hook. What concerns matter?</summary><div class="answer">Handle aborting stale requests, race conditions, loading/error/data state, dependency stability, retries only where safe, authentication expiry, deduplication, cache policy, and unmount cleanup. In production, prefer a mature server-state library unless the use case is intentionally small.</div></details>
-<h3>Common React traps</h3>
-<ul><li>Using <code>useEffect</code> for derived state that can be computed during render.</li><li>Missing effect cleanup for subscriptions/timers.</li><li>Suppressing dependency warnings instead of fixing stale closures.</li><li>Mutating state.</li><li>Using index keys for dynamic lists.</li><li>Globalizing server state unnecessarily.</li><li>Memoizing everything without measurement.</li></ul>
-<div class="callout"><b>Rapid revision:</b> Be able to explain exactly why a component rendered, when effects clean up, how stale closures occur, how RTK Query cache keys/tags work, and when Context is not a Redux replacement.</div></section>
+     Effects as scheduled</pre
+          >
+        </div>
+        <p>
+          <b>Must master:</b> component model, JSX, props/state, controlled
+          inputs, lifting state, reconciliation, keys, Fiber, render/commit
+          phases, hooks rules, useState batching, effects and cleanup, stale
+          closures, refs, context, reducers, custom hooks, memoization, error
+          boundaries, lazy/Suspense, transitions, profiling, virtualization,
+          accessibility, forms, testing, SSR/hydration, Server/Client
+          Components.
+        </p>
+        <details class="qa" data-level="intermediate">
+          <summary>
+            <span class="badge">Intermediate</span>Virtual DOM vs reconciliation
+            vs Fiber—what is the difference?
+          </summary>
+          <div class="answer">
+            The virtual DOM is the in-memory representation of UI elements.
+            Reconciliation is React's process for deciding what changed between
+            renders. Fiber is the internal architecture and work-unit data
+            structure that enables interruptible rendering, priorities,
+            scheduling, and concurrent features. They are related but not
+            synonyms.
+          </div>
+        </details>
+        <details class="qa" data-level="intermediate">
+          <summary>
+            <span class="badge">Intermediate</span>What causes a React component
+            to render?
+          </summary>
+          <div class="answer">
+            Its state changes, its parent renders, a consumed context value
+            changes, or an external store subscription signals an update. A
+            render does not necessarily mean DOM mutation; React reconciles the
+            output and commits only required changes.
+            <code>React.memo</code> can skip parent-driven renders when props
+            are shallowly equal, but local state and context can still trigger
+            rendering.
+          </div>
+        </details>
+        <details class="qa" data-level="intermediate">
+          <summary>
+            <span class="badge">Intermediate</span>useMemo vs useCallback vs
+            React.memo?
+          </summary>
+          <div class="answer">
+            <code>useMemo</code> caches a computed value,
+            <code>useCallback</code> caches a function reference, and
+            <code>React.memo</code> can skip rendering a component when props
+            compare equal. Memoization has overhead and should target measured
+            expensive work or reference-stability requirements, not be applied
+            everywhere.
+          </div>
+        </details>
+        <details class="qa" data-level="advanced">
+          <summary>
+            <span class="badge">Advanced</span>Why are keys important? Why is
+            array index often dangerous?
+          </summary>
+          <div class="answer">
+            Keys identify sibling elements across renders. Stable keys let React
+            preserve component identity and state. Index keys become incorrect
+            when items are inserted, deleted, sorted, or filtered because state
+            may attach to the wrong logical item. Index is acceptable for static
+            lists that never reorder or change identity.
+          </div>
+        </details>
+        <details class="qa" data-level="senior">
+          <summary>
+            <span class="badge">Senior</span>Redux Toolkit vs Context vs
+            Zustand—how do you choose?
+          </summary>
+          <div class="answer">
+            Context is best for relatively low-frequency cross-tree values such
+            as theme or authenticated user metadata. Redux Toolkit is
+            appropriate for complex shared client state requiring predictable
+            transitions, middleware, DevTools, normalization, and large-team
+            conventions. Zustand offers a smaller API and selective
+            subscriptions for simpler global client state. Server-state fetching
+            should usually use RTK Query, TanStack Query, or framework caching
+            rather than hand-built global state.
+          </div>
+        </details>
+        <details class="qa" data-level="advanced">
+          <summary>
+            <span class="badge">Advanced</span>Explain RTK Query cache
+            invalidation.
+          </summary>
+          <div class="answer">
+            RTK Query cache invalidation is an automated mechanism that forces
+            query endpoints to re-fetch stale data when server-side changes
+            occur. It relies on a declaration-based <code>"cache tag"</code> system to track
+            which queries rely on which pieces of data, ensuring the application
+            UI remains synchronized with the database.
+          </div>
+        </details>
+        <details class="qa" data-level="senior">
+          <summary>
+            <span class="badge">Senior</span>How would you diagnose a slow React
+            page?
+          </summary>
+          <div class="answer">
+            Measure first: React Profiler, browser Performance panel, Web
+            Vitals, network waterfall, bundle analyzer. Separate network
+            latency, JavaScript parse/execute time, render cost, layout/paint,
+            and memory. Then optimize the actual bottleneck using code
+            splitting, virtualization, stable props, selective subscriptions,
+            memoization, caching, image optimization, or server rendering.
+          </div>
+        </details>
+        <details class="qa" data-level="coding">
+          <summary>
+            <span class="badge">Coding</span>Build a production-grade useFetch
+            hook. What concerns matter?
+          </summary>
+          <div class="answer">
+            Handle aborting stale requests, race conditions, loading/error/data
+            state, dependency stability, retries only where safe, authentication
+            expiry, deduplication, cache policy, and unmount cleanup. In
+            production, prefer a mature server-state library unless the use case
+            is intentionally small.
+          </div>
+        </details>
+        <h3>Common React traps</h3>
+        <ul>
+          <li>
+            Using <code>useEffect</code> for derived state that can be computed
+            during render.
+          </li>
+          <li>Missing effect cleanup for subscriptions/timers.</li>
+          <li>
+            Suppressing dependency warnings instead of fixing stale closures.
+          </li>
+          <li>Mutating state.</li>
+          <li>Using index keys for dynamic lists.</li>
+          <li>Globalizing server state unnecessarily.</li>
+          <li>Memoizing everything without measurement.</li>
+        </ul>
+        <div class="callout">
+          <b>Rapid revision:</b> Be able to explain exactly why a component
+          rendered, when effects clean up, how stale closures occur, how RTK
+          Query cache keys/tags work, and when Context is not a Redux
+          replacement.
+        </div>
+      </section>
 
-<section id="next" class="chapter searchable"><h2>5. Next.js</h2><details class="qa" data-level="intermediate"><summary><span class="badge">Intermediate</span>SSR vs SSG vs ISR vs CSR?</summary><div class="answer">SSR renders per request; SSG pre-renders at build time; ISR serves cached static output and regenerates according to revalidation semantics; CSR renders/fetches primarily in the browser. Choose per route and data requirement. Consider freshness, personalization, cacheability, SEO, latency, build time, and infrastructure cost.</div></details><details class="qa" data-level="advanced"><summary><span class="badge">Advanced</span>Server Components vs Client Components?</summary><div class="answer">Server Components execute on the server, can access server-side resources directly, and do not ship their component JavaScript to the browser. Client Components are required for state, effects, event handlers, and browser APIs. A <code>'use client'</code> boundary pulls the client module graph into the client bundle; keep it narrow.</div></details><details class="qa" data-level="senior"><summary><span class="badge">Senior</span>Explain Next.js caching without hand-waving.</summary><div class="answer">Separate browser/CDN cache, full-route cache, data/request cache, request memoization, and application-level caches. Exact semantics vary by Next.js version, so in an interview state the version you used. Explain what is static or dynamic, revalidation triggers, cache tags/paths if used, and authentication/personalization boundaries.</div></details><details class="qa" data-level="advanced"><summary><span class="badge">Advanced</span>Hydration mismatch causes?</summary><div class="answer">Server and client render different initial markup due to time/randomness, browser-only state, invalid HTML nesting, locale/timezone differences, extension mutations, or data races. Fix by making initial render deterministic, moving browser-only logic to effects/client boundaries, or intentionally suppressing only understood mismatches.</div></details>
-<h3>Production checklist</h3><p>Rendering strategy per route; server/client boundary; caching and revalidation; authentication and authorization; middleware scope; metadata/SEO; Core Web Vitals; image/font optimization; code splitting; environment secrets; API/route handlers; streaming and loading states; error boundaries; deployment runtime; logging and tracing.</p>
-<div class="callout"><b>Version trap:</b> Next.js caching and rendering semantics evolve. State which version and router you actually used before answering implementation-specific questions.</div></section>
+      <section id="next" class="chapter searchable">
+        <h2>5. Next.js</h2>
+        <details class="qa" data-level="intermediate">
+          <summary>
+            <span class="badge">Intermediate</span>SSR vs SSG vs ISR vs CSR?
+          </summary>
+          <div class="answer">
+            SSR renders per request; SSG pre-renders at build time; ISR serves
+            cached static output and regenerates according to revalidation
+            semantics; CSR renders/fetches primarily in the browser. Choose per
+            route and data requirement. Consider freshness, personalization,
+            cacheability, SEO, latency, build time, and infrastructure cost.
+          </div>
+        </details>
+        <details class="qa" data-level="advanced">
+          <summary>
+            <span class="badge">Advanced</span>Server Components vs Client
+            Components?
+          </summary>
+          <div class="answer">
+            Server Components execute on the server, can access server-side
+            resources directly, and do not ship their component JavaScript to
+            the browser. Client Components are required for state, effects,
+            event handlers, and browser APIs. A
+            <code>'use client'</code> boundary pulls the client module graph
+            into the client bundle; keep it narrow.
+          </div>
+        </details>
+        <details class="qa" data-level="senior">
+          <summary>
+            <span class="badge">Senior</span>Explain Next.js caching without
+            hand-waving.
+          </summary>
+          <div class="answer">
+            Separate browser/CDN cache, full-route cache, data/request cache,
+            request memoization, and application-level caches. Exact semantics
+            vary by Next.js version, so in an interview state the version you
+            used. Explain what is static or dynamic, revalidation triggers,
+            cache tags/paths if used, and authentication/personalization
+            boundaries.
+          </div>
+        </details>
+        <details class="qa" data-level="advanced">
+          <summary>
+            <span class="badge">Advanced</span>Hydration mismatch causes?
+          </summary>
+          <div class="answer">
+            Server and client render different initial markup due to
+            time/randomness, browser-only state, invalid HTML nesting,
+            locale/timezone differences, extension mutations, or data races. Fix
+            by making initial render deterministic, moving browser-only logic to
+            effects/client boundaries, or intentionally suppressing only
+            understood mismatches.
+          </div>
+        </details>
+        <h3>Production checklist</h3>
+        <p>
+          Rendering strategy per route; server/client boundary; caching and
+          revalidation; authentication and authorization; middleware scope;
+          metadata/SEO; Core Web Vitals; image/font optimization; code
+          splitting; environment secrets; API/route handlers; streaming and
+          loading states; error boundaries; deployment runtime; logging and
+          tracing.
+        </p>
+        <div class="callout">
+          <b>Version trap:</b> Next.js caching and rendering semantics evolve.
+          State which version and router you actually used before answering
+          implementation-specific questions.
+        </div>
+      </section>
 
-<section id="node" class="chapter searchable"><h2>6. Node.js & Express</h2><details class="qa" data-level="intermediate"><summary><span class="badge">Intermediate</span>If Node.js is single-threaded, how does it handle concurrency?</summary><div class="answer">JavaScript callbacks execute on the main event-loop thread, but the runtime delegates many operations to the OS or libuv. Network I/O is generally event-driven; some filesystem, DNS, crypto, and compression work uses libuv's thread pool. Worker Threads provide JavaScript parallelism for CPU-bound work.</div></details><details class="qa" data-level="advanced"><summary><span class="badge">Advanced</span>Explain Node.js event-loop phases.</summary><div class="answer">At a high level: timers, pending callbacks, idle/prepare internals, poll, check, and close callbacks. <code>process.nextTick</code> has its own high-priority queue and can starve I/O if recursively scheduled. Promise microtasks are also processed between turns/callback boundaries according to Node's runtime semantics.</div></details><details class="qa" data-level="advanced"><summary><span class="badge">Advanced</span>Streams and backpressure?</summary><div class="answer">Streams process data incrementally instead of buffering the entire payload. Backpressure prevents a fast producer from overwhelming a slower consumer. For writable streams, if <code>write()</code> returns false, wait for <code>drain</code>. Prefer <code>pipeline()</code> because it propagates errors and closes streams safely.</div></details><details class="qa" data-level="senior"><summary><span class="badge">Senior</span>Cluster vs Worker Threads vs Child Processes?</summary><div class="answer">Cluster runs multiple Node processes, historically useful for sharing a server port across CPU cores. Worker Threads provide parallel JavaScript execution with lower communication overhead and optional shared memory. Child Processes run separate processes and are ideal for isolation or invoking external programs. In containers, horizontal scaling across replicas is often preferred over cluster.</div></details><details class="qa" data-level="faang"><summary><span class="badge">FAANG</span>How would you scale an API to millions of requests?</summary><div class="answer">Keep instances stateless; load balance across replicas; cache hot reads; use CDN for static/public cacheable content; add indexes and read replicas where justified; paginate; move slow work to queues; enforce timeouts, retries with jitter, circuit breakers, rate limits, idempotency, and backpressure; partition data only when simpler measures stop working; instrument p95/p99 latency, errors, saturation, queue depth, and dependency health.</div></details>
-<h3>Express production pipeline</h3>
-<div class="diagram"><pre>Request → Request ID → Security Headers → CORS → Body Limits → AuthN → Validation → AuthZ
+      <section id="node" class="chapter searchable">
+        <h2>6. Node.js & Express</h2>
+        <details class="qa" data-level="intermediate">
+          <summary>
+            <span class="badge">Intermediate</span>If Node.js is
+            single-threaded, how does it handle concurrency?
+          </summary>
+          <div class="answer">
+            JavaScript callbacks execute on the main event-loop thread, but the
+            runtime delegates many operations to the OS or libuv. Network I/O is
+            generally event-driven; some filesystem, DNS, crypto, and
+            compression work uses libuv's thread pool. Worker Threads provide
+            JavaScript parallelism for CPU-bound work.
+          </div>
+        </details>
+        <details class="qa" data-level="advanced">
+          <summary>
+            <span class="badge">Advanced</span>Explain Node.js event-loop
+            phases.
+          </summary>
+          <div class="answer">
+            At a high level: timers, pending callbacks, idle/prepare internals,
+            poll, check, and close callbacks. <code>process.nextTick</code> has
+            its own high-priority queue and can starve I/O if recursively
+            scheduled. Promise microtasks are also processed between
+            turns/callback boundaries according to Node's runtime semantics.
+          </div>
+        </details>
+        <details class="qa" data-level="advanced">
+          <summary>
+            <span class="badge">Advanced</span>Streams and backpressure?
+          </summary>
+          <div class="answer">
+            Streams process data incrementally instead of buffering the entire
+            payload. Backpressure prevents a fast producer from overwhelming a
+            slower consumer. For writable streams, if
+            <code>write()</code> returns false, wait for <code>drain</code>.
+            Prefer <code>pipeline()</code> because it propagates errors and
+            closes streams safely.
+          </div>
+        </details>
+        <details class="qa" data-level="senior">
+          <summary>
+            <span class="badge">Senior</span>Cluster vs Worker Threads vs Child
+            Processes?
+          </summary>
+          <div class="answer">
+            Cluster runs multiple Node processes, historically useful for
+            sharing a server port across CPU cores. Worker Threads provide
+            parallel JavaScript execution with lower communication overhead and
+            optional shared memory. Child Processes run separate processes and
+            are ideal for isolation or invoking external programs. In
+            containers, horizontal scaling across replicas is often preferred
+            over cluster.
+          </div>
+        </details>
+        <details class="qa" data-level="faang">
+          <summary>
+            <span class="badge">FAANG</span>How would you scale an API to
+            millions of requests?
+          </summary>
+          <div class="answer">
+            Keep instances stateless; load balance across replicas; cache hot
+            reads; use CDN for static/public cacheable content; add indexes and
+            read replicas where justified; paginate; move slow work to queues;
+            enforce timeouts, retries with jitter, circuit breakers, rate
+            limits, idempotency, and backpressure; partition data only when
+            simpler measures stop working; instrument p95/p99 latency, errors,
+            saturation, queue depth, and dependency health.
+          </div>
+        </details>
+        <h3>Express production pipeline</h3>
+        <div class="diagram">
+          <pre>
+Request → Request ID → Security Headers → CORS → Body Limits → AuthN → Validation → AuthZ
         → Controller → Service → Repository/External API → Response
                                   │
-                                  └── Typed errors → Central error middleware → Logs/Sentry</pre></div>
-<h3>Common production mistakes</h3><p>Blocking the event loop with CPU work, unbounded <code>Promise.all</code>, missing timeouts, retrying non-idempotent writes blindly, accepting huge bodies, leaking stack traces, swallowing async errors, logging secrets/PII, no graceful shutdown, no backpressure, and keeping state only in process memory when horizontally scaled.</p>
-<div class="callout"><b>Rapid revision:</b> event loop, libuv, streams, backpressure, worker threads, process vs thread, middleware order, graceful shutdown, timeout/retry/idempotency, p95/p99 latency.</div></section>
+                                  └── Typed errors → Central error middleware → Logs/Sentry</pre
+          >
+        </div>
+        <h3>Common production mistakes</h3>
+        <p>
+          Blocking the event loop with CPU work, unbounded
+          <code>Promise.all</code>, missing timeouts, retrying non-idempotent
+          writes blindly, accepting huge bodies, leaking stack traces,
+          swallowing async errors, logging secrets/PII, no graceful shutdown, no
+          backpressure, and keeping state only in process memory when
+          horizontally scaled.
+        </p>
+        <div class="callout">
+          <b>Rapid revision:</b> event loop, libuv, streams, backpressure,
+          worker threads, process vs thread, middleware order, graceful
+          shutdown, timeout/retry/idempotency, p95/p99 latency.
+        </div>
+      </section>
 
-<section id="backend" class="chapter searchable"><h2>7. Backend, APIs, Authentication & Security</h2><details class="qa" data-level="intermediate"><summary><span class="badge">Intermediate</span>JWT vs session-based authentication?</summary><div class="answer">JWTs can support stateless verification and cross-service claims but are difficult to revoke immediately and are often overused. Server-side sessions allow straightforward revocation and smaller opaque cookies but require shared/session storage at scale. For browser apps, prefer secure, HttpOnly, SameSite cookies where appropriate and model CSRF carefully.</div></details><details class="qa" data-level="beginner"><summary><span class="badge">Beginner</span>Authentication vs authorization?</summary><div class="answer">Authentication establishes who the principal is. Authorization decides what that principal may do. RBAC maps users to roles and roles to permissions; ABAC uses attributes and policies. Always enforce authorization server-side at the resource/action boundary.</div></details><details class="qa" data-level="advanced"><summary><span class="badge">Advanced</span>How do XSS, CSRF, CORS, and SQL injection differ?</summary><div class="answer">XSS executes attacker-controlled script in a trusted origin. CSRF tricks an authenticated browser into making an unwanted request. CORS is a browser policy controlling cross-origin reads; it is not authentication. SQL injection changes query meaning through unsafe input interpolation. Mitigate with output encoding/safe rendering, CSP, CSRF tokens or SameSite strategy, strict origin policy, parameterized queries, least privilege, and validation.</div></details><details class="qa" data-level="senior"><summary><span class="badge">Senior</span>Design retries correctly.</summary><div class="answer">Retry only transient failures; cap attempts; use exponential backoff plus jitter; set per-attempt and overall deadlines; respect <code>Retry-After</code>; make side effects idempotent; avoid synchronized retry storms; use circuit breakers when dependency failure persists; expose retry metrics.</div></details><details class="qa" data-level="advanced"><summary><span class="badge">Advanced</span>What is idempotency?</summary><div class="answer">An operation is idempotent when repeating it has the same intended effect as performing it once. For payment/workflow creation, accept an idempotency key, persist the key with request fingerprint and result/status under a uniqueness constraint, and return the original result for safe repeats.</div></details><details class="qa" data-level="intermediate"><summary><span class="badge">Intermediate</span>REST API design checklist?</summary><div class="answer">Resource-oriented URLs, correct methods/status codes, validation, consistent errors, pagination, filtering/sorting, versioning strategy, idempotency, authentication/authorization, rate limits, timeouts, observability, OpenAPI contract, and backward compatibility.</div></details>
-<h3>Security revision checklist</h3><p>Password hashing (Argon2/bcrypt), secure cookies, JWT expiry/rotation strategy, OAuth/OIDC basics, RBAC/ABAC, input validation, output encoding, CSP, CORS, CSRF, XSS, SQL/NoSQL injection, SSRF, IDOR/BOLA, rate limiting, secrets management, encryption in transit/at rest, audit logs, dependency security, file-upload validation, signed URLs, malware scanning, least privilege.</p>
-<div class="callout"><b>Rapid revision:</b> CORS is not authentication; JWT is not encryption; frontend role checks are not authorization; validation alone does not replace parameterized queries.</div></section>
+      <section id="backend" class="chapter searchable">
+        <h2>7. Backend, APIs, Authentication & Security</h2>
+        <details class="qa" data-level="intermediate">
+          <summary>
+            <span class="badge">Intermediate</span>JWT vs session-based
+            authentication?
+          </summary>
+          <div class="answer">
+            JWTs can support stateless verification and cross-service claims but
+            are difficult to revoke immediately and are often overused.
+            Server-side sessions allow straightforward revocation and smaller
+            opaque cookies but require shared/session storage at scale. For
+            browser apps, prefer secure, HttpOnly, SameSite cookies where
+            appropriate and model CSRF carefully.
+          </div>
+        </details>
+        <details class="qa" data-level="beginner">
+          <summary>
+            <span class="badge">Beginner</span>Authentication vs authorization?
+          </summary>
+          <div class="answer">
+            Authentication establishes who the principal is. Authorization
+            decides what that principal may do. RBAC maps users to roles and
+            roles to permissions; ABAC uses attributes and policies. Always
+            enforce authorization server-side at the resource/action boundary.
+          </div>
+        </details>
+        <details class="qa" data-level="advanced">
+          <summary>
+            <span class="badge">Advanced</span>How do XSS, CSRF, CORS, and SQL
+            injection differ?
+          </summary>
+          <div class="answer">
+            XSS executes attacker-controlled script in a trusted origin. CSRF
+            tricks an authenticated browser into making an unwanted request.
+            CORS is a browser policy controlling cross-origin reads; it is not
+            authentication. SQL injection changes query meaning through unsafe
+            input interpolation. Mitigate with output encoding/safe rendering,
+            CSP, CSRF tokens or SameSite strategy, strict origin policy,
+            parameterized queries, least privilege, and validation.
+          </div>
+        </details>
+        <details class="qa" data-level="senior">
+          <summary>
+            <span class="badge">Senior</span>Design retries correctly.
+          </summary>
+          <div class="answer">
+            Retry only transient failures; cap attempts; use exponential backoff
+            plus jitter; set per-attempt and overall deadlines; respect
+            <code>Retry-After</code>; make side effects idempotent; avoid
+            synchronized retry storms; use circuit breakers when dependency
+            failure persists; expose retry metrics.
+          </div>
+        </details>
+        <details class="qa" data-level="advanced">
+          <summary>
+            <span class="badge">Advanced</span>What is idempotency?
+          </summary>
+          <div class="answer">
+            An operation is idempotent when repeating it has the same intended
+            effect as performing it once. For payment/workflow creation, accept
+            an idempotency key, persist the key with request fingerprint and
+            result/status under a uniqueness constraint, and return the original
+            result for safe repeats.
+          </div>
+        </details>
+        <details class="qa" data-level="intermediate">
+          <summary>
+            <span class="badge">Intermediate</span>REST API design checklist?
+          </summary>
+          <div class="answer">
+            Resource-oriented URLs, correct methods/status codes, validation,
+            consistent errors, pagination, filtering/sorting, versioning
+            strategy, idempotency, authentication/authorization, rate limits,
+            timeouts, observability, OpenAPI contract, and backward
+            compatibility.
+          </div>
+        </details>
+        <h3>Security revision checklist</h3>
+        <p>
+          Password hashing (Argon2/bcrypt), secure cookies, JWT expiry/rotation
+          strategy, OAuth/OIDC basics, RBAC/ABAC, input validation, output
+          encoding, CSP, CORS, CSRF, XSS, SQL/NoSQL injection, SSRF, IDOR/BOLA,
+          rate limiting, secrets management, encryption in transit/at rest,
+          audit logs, dependency security, file-upload validation, signed URLs,
+          malware scanning, least privilege.
+        </p>
+        <div class="callout">
+          <b>Rapid revision:</b> CORS is not authentication; JWT is not
+          encryption; frontend role checks are not authorization; validation
+          alone does not replace parameterized queries.
+        </div>
+      </section>
 
-<section id="databases" class="chapter searchable"><h2>8. PostgreSQL, MySQL & MongoDB</h2><details class="qa" data-level="intermediate"><summary><span class="badge">Intermediate</span>What is a database index internally?</summary><div class="answer">Usually a B-tree/B+ tree structure for ordered lookups; some systems also support hash, GIN, GiST, full-text, geospatial, or other index types. An index trades additional storage and write cost for faster reads. Composite index usefulness depends on column order, selectivity, predicates, sorting, and the database optimizer.</div></details><details class="qa" data-level="advanced"><summary><span class="badge">Advanced</span>Why can an index make performance worse?</summary><div class="answer">Every insert/update/delete may need index maintenance; indexes consume memory and storage; low-selectivity indexes may not help; too many indexes increase write amplification; and an unsuitable index can encourage a poor plan. Validate with <code>EXPLAIN</code>/<code>EXPLAIN ANALYZE</code> and production-like data.</div></details><details class="qa" data-level="senior"><summary><span class="badge">Senior</span>PostgreSQL vs MySQL vs MongoDB for your fintech platform?</summary><div class="answer">A strong answer starts from access patterns and invariants. PostgreSQL is a natural choice for transactional financial entities, joins, constraints, and complex querying. MySQL is also a strong relational choice with different operational/ecosystem trade-offs. MongoDB is useful where aggregate-shaped documents, flexible evolving payloads, or raw third-party responses fit document access patterns. Avoid saying MongoDB has 'no schema'; production systems still require schema governance and validation.</div></details><details class="qa" data-level="advanced"><summary><span class="badge">Advanced</span>Explain ACID and isolation anomalies.</summary><div class="answer">Atomicity: all-or-nothing transaction. Consistency: transactions preserve declared invariants. Isolation: concurrent transactions behave according to an isolation level. Durability: committed data survives failures within the database's guarantees. Know dirty reads, non-repeatable reads, phantom reads, lost updates, write skew, MVCC, locks, and why serializable isolation has higher coordination cost.</div></details><details class="qa" data-level="intermediate"><summary><span class="badge">Intermediate</span>What is the N+1 query problem?</summary><div class="answer">One query fetches N parent records, then N additional queries fetch related data. Fix with joins, batching, prefetching, DataLoader-style aggregation, or redesigned endpoints. Measure because one giant join can also cause row explosion.</div></details>
-<h3>Database decision matrix</h3>
-<table><thead><tr><th>Concern</th><th>Relational DB</th><th>MongoDB/document model</th></tr></thead><tbody>
-<tr><td>Strong multi-row invariants</td><td>Natural fit</td><td>Possible, but model carefully</td></tr>
-<tr><td>Joins and ad-hoc analytics</td><td>Strong</td><td>Aggregation available; joins less central</td></tr>
-<tr><td>Nested aggregate documents</td><td>JSON possible</td><td>Natural fit</td></tr>
-<tr><td>Schema evolution</td><td>Migrations and constraints</td><td>Flexible shape, still needs validation/governance</td></tr>
-<tr><td>Horizontal partitioning</td><td>Depends on engine/architecture</td><td>Built-in sharding capabilities, operational complexity remains</td></tr>
-</tbody></table>
-<h3>Query optimization protocol</h3><ol><li>Measure slow query and real parameters.</li><li>Inspect query plan.</li><li>Check row estimates vs actuals.</li><li>Reduce scanned rows and returned columns.</li><li>Design index for predicates/order/join.</li><li>Check write/storage cost.</li><li>Retest with production-like cardinality.</li><li>Monitor after rollout.</li></ol>
-<div class="callout"><b>Rapid revision:</b> B-tree indexes, composite index order, covering/index-only scans, N+1, ACID, MVCC, isolation anomalies, replication lag, partitioning vs sharding, normalization vs denormalization.</div></section>
+      <section id="databases" class="chapter searchable">
+        <h2>8. PostgreSQL, MySQL & MongoDB</h2>
+        <details class="qa" data-level="intermediate">
+          <summary>
+            <span class="badge">Intermediate</span>What is a database index
+            internally?
+          </summary>
+          <div class="answer">
+            Usually a B-tree/B+ tree structure for ordered lookups; some systems
+            also support hash, GIN, GiST, full-text, geospatial, or other index
+            types. An index trades additional storage and write cost for faster
+            reads. Composite index usefulness depends on column order,
+            selectivity, predicates, sorting, and the database optimizer.
+          </div>
+        </details>
+        <details class="qa" data-level="advanced">
+          <summary>
+            <span class="badge">Advanced</span>Why can an index make performance
+            worse?
+          </summary>
+          <div class="answer">
+            Every insert/update/delete may need index maintenance; indexes
+            consume memory and storage; low-selectivity indexes may not help;
+            too many indexes increase write amplification; and an unsuitable
+            index can encourage a poor plan. Validate with
+            <code>EXPLAIN</code>/<code>EXPLAIN ANALYZE</code> and
+            production-like data.
+          </div>
+        </details>
+        <details class="qa" data-level="senior">
+          <summary>
+            <span class="badge">Senior</span>PostgreSQL vs MySQL vs MongoDB for
+            your fintech platform?
+          </summary>
+          <div class="answer">
+            A strong answer starts from access patterns and invariants.
+            PostgreSQL is a natural choice for transactional financial entities,
+            joins, constraints, and complex querying. MySQL is also a strong
+            relational choice with different operational/ecosystem trade-offs.
+            MongoDB is useful where aggregate-shaped documents, flexible
+            evolving payloads, or raw third-party responses fit document access
+            patterns. Avoid saying MongoDB has 'no schema'; production systems
+            still require schema governance and validation.
+          </div>
+        </details>
+        <details class="qa" data-level="advanced">
+          <summary>
+            <span class="badge">Advanced</span>Explain ACID and isolation
+            anomalies.
+          </summary>
+          <div class="answer">
+            Atomicity: all-or-nothing transaction. Consistency: transactions
+            preserve declared invariants. Isolation: concurrent transactions
+            behave according to an isolation level. Durability: committed data
+            survives failures within the database's guarantees. Know dirty
+            reads, non-repeatable reads, phantom reads, lost updates, write
+            skew, MVCC, locks, and why serializable isolation has higher
+            coordination cost.
+          </div>
+        </details>
+        <details class="qa" data-level="intermediate">
+          <summary>
+            <span class="badge">Intermediate</span>What is the N+1 query
+            problem?
+          </summary>
+          <div class="answer">
+            One query fetches N parent records, then N additional queries fetch
+            related data. Fix with joins, batching, prefetching,
+            DataLoader-style aggregation, or redesigned endpoints. Measure
+            because one giant join can also cause row explosion.
+          </div>
+        </details>
+        <h3>Database decision matrix</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Concern</th>
+              <th>Relational DB</th>
+              <th>MongoDB/document model</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Strong multi-row invariants</td>
+              <td>Natural fit</td>
+              <td>Possible, but model carefully</td>
+            </tr>
+            <tr>
+              <td>Joins and ad-hoc analytics</td>
+              <td>Strong</td>
+              <td>Aggregation available; joins less central</td>
+            </tr>
+            <tr>
+              <td>Nested aggregate documents</td>
+              <td>JSON possible</td>
+              <td>Natural fit</td>
+            </tr>
+            <tr>
+              <td>Schema evolution</td>
+              <td>Migrations and constraints</td>
+              <td>Flexible shape, still needs validation/governance</td>
+            </tr>
+            <tr>
+              <td>Horizontal partitioning</td>
+              <td>Depends on engine/architecture</td>
+              <td>
+                Built-in sharding capabilities, operational complexity remains
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <h3>Query optimization protocol</h3>
+        <ol>
+          <li>Measure slow query and real parameters.</li>
+          <li>Inspect query plan.</li>
+          <li>Check row estimates vs actuals.</li>
+          <li>Reduce scanned rows and returned columns.</li>
+          <li>Design index for predicates/order/join.</li>
+          <li>Check write/storage cost.</li>
+          <li>Retest with production-like cardinality.</li>
+          <li>Monitor after rollout.</li>
+        </ol>
+        <div class="callout">
+          <b>Rapid revision:</b> B-tree indexes, composite index order,
+          covering/index-only scans, N+1, ACID, MVCC, isolation anomalies,
+          replication lag, partitioning vs sharding, normalization vs
+          denormalization.
+        </div>
+      </section>
 
-<section id="system-design" class="chapter searchable"><h2>9. System Design — HLD, LLD & Distributed Systems</h2>
-<div class="diagram"><pre>Users → DNS/CDN/WAF → Load Balancer/API Gateway → Stateless App Replicas
+      <section id="system-design" class="chapter searchable">
+        <h2>9. System Design — HLD, LLD & Distributed Systems</h2>
+        <div class="diagram">
+          <pre>
+Users → DNS/CDN/WAF → Load Balancer/API Gateway → Stateless App Replicas
                                                 │       │
                                                 │       ├── Redis Cache
                                                 │       ├── SQL Primary → Read Replicas
@@ -166,21 +1264,126 @@ table{width:100%;border-collapse:collapse;background:var(--panel);margin:14px 0}
                                            Message Queue → Workers → External APIs
                                                 │
                                                 └── DLQ / Replay
-All layers → Logs + Metrics + Traces + Alerts + SLO dashboards</pre></div>
-<details class="qa" data-level="faang"><summary><span class="badge">FAANG</span>Design a credit report processing platform integrating Equifax and Experian.</summary><div class="answer">Start with requirements: request volume, SLA, latency, provider limits, consistency, audit requirements, PII handling, retries, and whether results can be asynchronous. Use an API gateway/auth layer, orchestration service, durable job queue, provider adapters, encrypted data stores, webhook callback processor, idempotency store, dead-letter queue, observability, and admin UI. Never expose provider credentials to clients. Use correlation IDs and immutable audit events. Separate transient retryable errors from permanent business failures.</div></details><details class="qa" data-level="senior"><summary><span class="badge">Senior</span>How do you make a webhook receiver production-safe?</summary><div class="answer">Authenticate signatures, preserve raw request body when required for HMAC verification, enforce replay windows, use idempotency keys/event IDs, respond quickly after durable acceptance, process asynchronously, retry safely, keep a dead-letter path, log correlation IDs without leaking secrets/PII, and provide reconciliation jobs for missed events.</div></details><details class="qa" data-level="intermediate"><summary><span class="badge">Intermediate</span>When should you use a queue?</summary><div class="answer">When work can be asynchronous, needs smoothing during traffic spikes, requires durable retries, isolates dependencies, or fans out to consumers. Trade-offs: eventual consistency, duplicate delivery, ordering limitations, operational complexity, poison messages, and observability requirements.</div></details><details class="qa" data-level="advanced"><summary><span class="badge">Advanced</span>Explain CAP theorem without the common oversimplification.</summary><div class="answer">In the presence of a network partition, a distributed data system must choose between continuing to provide every request with a response that may not be consistent (availability) or rejecting/delaying some requests to preserve a single consistent view (consistency). CAP is about partition scenarios, not a permanent two-of-three menu for all normal operation.</div></details>
-<h3>System design interview framework</h3>
-<ol><li>Clarify functional and non-functional requirements.</li><li>Estimate users, QPS, storage, bandwidth, and growth only where useful.</li><li>Define API contracts and data model.</li><li>Draw the simplest viable high-level design.</li><li>Trace critical read/write flows.</li><li>Identify bottlenecks and failure modes.</li><li>Deep dive into consistency, cache, queue, database, security, and observability.</li><li>State trade-offs and evolution path.</li></ol>
-<h3>LLD topics</h3>
-<p>SOLID, composition over inheritance, interfaces, dependency inversion, strategy, factory, observer/pub-sub, adapter, decorator, command, state pattern, repository pattern, dependency injection, domain boundaries, error modeling, concurrency safety, and testability. Practice: Parking Lot, Elevator, LRU Cache, Notification System, Rate Limiter, Task Scheduler, Splitwise, Logger, and Subscription Billing Engine.</p>
+All layers → Logs + Metrics + Traces + Alerts + SLO dashboards</pre
+          >
+        </div>
+        <details class="qa" data-level="faang">
+          <summary>
+            <span class="badge">FAANG</span>Design a credit report processing
+            platform integrating Equifax and Experian.
+          </summary>
+          <div class="answer">
+            Start with requirements: request volume, SLA, latency, provider
+            limits, consistency, audit requirements, PII handling, retries, and
+            whether results can be asynchronous. Use an API gateway/auth layer,
+            orchestration service, durable job queue, provider adapters,
+            encrypted data stores, webhook callback processor, idempotency
+            store, dead-letter queue, observability, and admin UI. Never expose
+            provider credentials to clients. Use correlation IDs and immutable
+            audit events. Separate transient retryable errors from permanent
+            business failures.
+          </div>
+        </details>
+        <details class="qa" data-level="senior">
+          <summary>
+            <span class="badge">Senior</span>How do you make a webhook receiver
+            production-safe?
+          </summary>
+          <div class="answer">
+            Authenticate signatures, preserve raw request body when required for
+            HMAC verification, enforce replay windows, use idempotency
+            keys/event IDs, respond quickly after durable acceptance, process
+            asynchronously, retry safely, keep a dead-letter path, log
+            correlation IDs without leaking secrets/PII, and provide
+            reconciliation jobs for missed events.
+          </div>
+        </details>
+        <details class="qa" data-level="intermediate">
+          <summary>
+            <span class="badge">Intermediate</span>When should you use a queue?
+          </summary>
+          <div class="answer">
+            When work can be asynchronous, needs smoothing during traffic
+            spikes, requires durable retries, isolates dependencies, or fans out
+            to consumers. Trade-offs: eventual consistency, duplicate delivery,
+            ordering limitations, operational complexity, poison messages, and
+            observability requirements.
+          </div>
+        </details>
+        <details class="qa" data-level="advanced">
+          <summary>
+            <span class="badge">Advanced</span>Explain CAP theorem without the
+            common oversimplification.
+          </summary>
+          <div class="answer">
+            In the presence of a network partition, a distributed data system
+            must choose between continuing to provide every request with a
+            response that may not be consistent (availability) or
+            rejecting/delaying some requests to preserve a single consistent
+            view (consistency). CAP is about partition scenarios, not a
+            permanent two-of-three menu for all normal operation.
+          </div>
+        </details>
+        <h3>System design interview framework</h3>
+        <ol>
+          <li>Clarify functional and non-functional requirements.</li>
+          <li>
+            Estimate users, QPS, storage, bandwidth, and growth only where
+            useful.
+          </li>
+          <li>Define API contracts and data model.</li>
+          <li>Draw the simplest viable high-level design.</li>
+          <li>Trace critical read/write flows.</li>
+          <li>Identify bottlenecks and failure modes.</li>
+          <li>
+            Deep dive into consistency, cache, queue, database, security, and
+            observability.
+          </li>
+          <li>State trade-offs and evolution path.</li>
+        </ol>
+        <h3>LLD topics</h3>
+        <p>
+          SOLID, composition over inheritance, interfaces, dependency inversion,
+          strategy, factory, observer/pub-sub, adapter, decorator, command,
+          state pattern, repository pattern, dependency injection, domain
+          boundaries, error modeling, concurrency safety, and testability.
+          Practice: Parking Lot, Elevator, LRU Cache, Notification System, Rate
+          Limiter, Task Scheduler, Splitwise, Logger, and Subscription Billing
+          Engine.
+        </p>
 
-<h3>Must-master topic checklist</h3><p>Load balancers, reverse proxies, CDN, caching patterns, Redis, queues, pub/sub, message brokers, delivery semantics, idempotency, event sourcing vs event-driven systems, microservices vs monolith, API gateway, service discovery, replication, sharding, consistent hashing, CAP, PACELC awareness, consensus basics, rate limiting algorithms, WebSockets, SSE, background jobs, cron, saga pattern, circuit breakers, bulkheads, backpressure, observability, SLI/SLO/SLA.</p>
-<div class="callout"><b>Rapid revision:</b> Never jump directly to Kafka, Kubernetes, microservices, or sharding. Start simple, quantify scale, identify the actual bottleneck, then evolve.</div></section>
+        <h3>Must-master topic checklist</h3>
+        <p>
+          Load balancers, reverse proxies, CDN, caching patterns, Redis, queues,
+          pub/sub, message brokers, delivery semantics, idempotency, event
+          sourcing vs event-driven systems, microservices vs monolith, API
+          gateway, service discovery, replication, sharding, consistent hashing,
+          CAP, PACELC awareness, consensus basics, rate limiting algorithms,
+          WebSockets, SSE, background jobs, cron, saga pattern, circuit
+          breakers, bulkheads, backpressure, observability, SLI/SLO/SLA.
+        </p>
+        <div class="callout">
+          <b>Rapid revision:</b> Never jump directly to Kafka, Kubernetes,
+          microservices, or sharding. Start simple, quantify scale, identify the
+          actual bottleneck, then evolve.
+        </div>
+      </section>
 
-<section id="projects" class="chapter searchable"><h2>10. Project Deep Dive — Ideal Answers</h2>
-<div class="callout"><b>Resume-grounded project map.</b> Your resume presents three main project/client narratives: a fintech Credit System Platform integrating credit-bureau and LLM-assisted workflows; a SaaS Subscription Marketplace with recurring workflow automation; and Trapeze Group's enterprise transit management system using Angular and reusable component libraries.</div>
+      <section id="projects" class="chapter searchable">
+        <h2>10. Project Deep Dive — Ideal Answers</h2>
+        <div class="callout">
+          <b>Resume-grounded project map.</b> Your resume presents three main
+          project/client narratives: a fintech Credit System Platform
+          integrating credit-bureau and LLM-assisted workflows; a SaaS
+          Subscription Marketplace with recurring workflow automation; and
+          Trapeze Group's enterprise transit management system using Angular and
+          reusable component libraries.
+        </div>
 
-<h3>Credit System Platform — Fintech Data Pipeline</h3>
-<div class="diagram"><pre>Client/Admin UI
+        <h3>Credit System Platform — Fintech Data Pipeline</h3>
+        <div class="diagram">
+          <pre>
+Client/Admin UI
       │ HTTPS + Auth
       ▼
 API Layer ──► Idempotency / Validation
@@ -192,153 +1395,973 @@ Orchestrator ──► Durable Queue ──► Workers ──► Equifax / Exper
       ▼
 PostgreSQL (transactions/metadata) + MongoDB (document-shaped payloads where justified)
       │
-      └──► Audit logs / Sentry / metrics / alerts</pre></div>
-<details class="qa" data-level="senior"><summary><span class="badge">Senior</span>Walk me through the complete request lifecycle in the credit platform.</summary><div class="answer">Ideal answer: A client sends an authenticated request. The API validates schema and authorization, creates or reuses an idempotent workflow record, persists durable state, and either returns immediately with a job ID or starts bounded synchronous work. The orchestrator dispatches provider-specific tasks. Workers call Equifax/Experian through adapters with explicit timeouts, safe retries with exponential backoff and jitter, rate-limit handling, and correlation IDs. Results are normalized, validated, stored, and passed to downstream scoring/LLM steps only when policy permits. Final status is persisted and delivered by polling/webhook/UI. Failures are classified as transient, permanent, or manual-review. Metrics cover latency, error rate, queue depth, retries, provider health, and workflow age.</div></details><details class="qa" data-level="resume cross-examination"><summary><span class="badge">Resume Cross-Examination</span>You claim ~25% API response-time reduction. Prove it.</summary><div class="answer">Prepare exact before/after numbers, endpoint scope, sample size, traffic profile, percentile used, and measurement tooling. A strong answer: 'I profiled the slow endpoint, inspected query plans, found an unindexed filter/join and unnecessary sequential calls, added the correct composite index, reduced selected columns, and parallelized independent I/O. p95 fell from X ms to Y ms under comparable load. I checked write overhead and regression metrics after deployment.' Do not rely only on an average if you can discuss p95/p99.</div></details><details class="qa" data-level="senior"><summary><span class="badge">Senior</span>Why both PostgreSQL and MongoDB? Was polyglot persistence actually necessary?</summary><div class="answer">Say exactly which entities lived where. Use PostgreSQL for transactional invariants, relational entities, constraints, reporting, and workflow state. Use MongoDB only if flexible, nested, high-variance third-party/LLM payloads or aggregate access patterns materially justified it. Acknowledge operational complexity: two backup strategies, consistency boundaries, monitoring, migrations, and developer cognitive load. If one database could handle the use case today, say so.</div></details><details class="qa" data-level="faang"><summary><span class="badge">FAANG</span>How do you prevent duplicate credit pulls when a job retries?</summary><div class="answer">Use an idempotency key tied to the business operation, persist operation state before external side effects, enforce a unique constraint, check provider capabilities for their own idempotency mechanism, and make consumers idempotent. Exactly-once processing is usually achieved as effectively-once business behavior through deduplication and transactional state—not by assuming the queue delivers exactly once.</div></details><details class="qa" data-level="faang"><summary><span class="badge">FAANG</span>How would you scale this platform to 10 million workflows per day?</summary><div class="answer">Estimate throughput first. Partition asynchronous workloads by tenant/workflow ID where ordering is needed. Autoscale workers based on queue age and depth. Respect third-party quotas with token-bucket rate limiting per provider. Cache only legally and semantically safe data. Partition large tables when evidence supports it, archive cold audit data, use read replicas for read-heavy reporting, isolate analytical workloads, batch where allowed, and establish SLOs. The third-party providers may be the real bottleneck, so backpressure and graceful degradation are central.</div></details>
-<h3>Subscription Marketplace — SaaS / Workflow Automation</h3>
-<details class="qa" data-level="senior"><summary><span class="badge">Senior</span>Design the recurring subscription lifecycle.</summary><div class="answer">Model explicit states: pending, trialing, active, past_due, paused, canceled, expired. Treat the billing provider webhook as an important external event source, but make processing idempotent and reconcile periodically. Store provider customer/subscription IDs, plan/version, billing period, next action, and event ledger. Never grant entitlements solely from an unverified client redirect.</div></details><details class="qa" data-level="advanced"><summary><span class="badge">Advanced</span>How do you design RBAC?</summary><div class="answer">Define resources, actions, roles, and permissions. Avoid scattering role-name checks throughout code; centralize authorization policies. Enforce on the server and test deny-by-default behavior. For multi-tenant SaaS, include tenant scope in every resource lookup and authorization decision to prevent IDOR/BOLA vulnerabilities.</div></details><details class="qa" data-level="senior"><summary><span class="badge">Senior</span>How do cron jobs fail in production?</summary><div class="answer">Duplicate execution across replicas, missed runs during downtime, overlapping runs, timezone/DST errors, long-running jobs, partial completion, and silent failures. Use distributed locks or a scheduler with durable semantics, idempotent handlers, explicit time zones, run history, heartbeats, retries, alerts, and reconciliation.</div></details>
-<h3>Trapeze Group — Enterprise Transit Management System</h3>
-<details class="qa" data-level="resume cross-examination"><summary><span class="badge">Resume Cross-Examination</span>How did reusable Angular modules reduce bugs?</summary><div class="answer">A good answer connects reuse to consistent behavior, typed interfaces, centralized fixes, design-system constraints, tests, and code review. Be ready to name specific shared components/services, the defect categories reduced, how the 15% figure was measured, and whether there were trade-offs such as overly generic APIs or bundle size.</div></details><details class="qa" data-level="advanced"><summary><span class="badge">Advanced</span>Angular change detection and OnPush?</summary><div class="answer">Default change detection checks broadly after async events. <code>OnPush</code> lets Angular skip a component subtree unless inputs change by reference, an event occurs in the subtree, an observable/async pipe emits, or change detection is explicitly requested. Immutable state and observable patterns make OnPush more predictable.</div></details></section>
-<section id="cross" class="chapter searchable"><h2>11. Resume Cross-Examination — Every Claim Under Pressure</h2>
-<p>Use this section as an adversarial drill. For each resume claim, answer in this order: <b>context → exact ownership → architecture → hardest decision → measurable result → failure/trade-off → what you would change now.</b></p>
-<table><thead><tr><th>Resume claim</th><th>Questions you must be able to answer</th></tr></thead><tbody>
-<tr><td>Owned end-to-end delivery</td><td>What did you personally design? Team size? What was inherited? Who reviewed architecture? Which deployment steps did you own? What production incident was yours to resolve?</td></tr>
-<tr><td>Ambiguous requirements</td><td>Give one exact ambiguous requirement. What questions did you ask? What assumptions were documented? How did you prevent rework?</td></tr>
-<tr><td>Equifax/Experian pipelines</td><td>Authentication method? Timeouts? Rate limits? Retry policy? Idempotency? Schema mapping? PII handling? Sandbox vs production? Provider outage behavior?</td></tr>
-<tr><td>Background queues</td><td>Which queue technology? Delivery semantics? Visibility timeout? Concurrency? Poison messages? DLQ? Ordering? Deduplication? Backpressure?</td></tr>
-<tr><td>25% response improvement</td><td>Which endpoint? Before/after p50/p95/p99? How measured? Query plan? Index type? Dataset size? Regression risk? Write overhead?</td></tr>
-<tr><td>70% faster with AI tools</td><td>How measured? Which tasks? How did you validate correctness? What did AI get wrong? Security/privacy policy? Were secrets or proprietary code exposed?</td></tr>
-<tr><td>High-volume transactional data</td><td>Define high volume numerically: rows, GB, QPS, writes/sec. Schema choices? Index cardinality? Lock contention? Transactions? Backup/recovery?</td></tr>
-<tr><td>CI/CD and observability</td><td>Pipeline stages? Branch strategy? Tests? Secrets? Rollback? Deployment strategy? Sentry release mapping? Alerts? SLOs? MTTR?</td></tr>
-<tr><td>React/Next + Redux/RTK Query</td><td>Why each tool? Server vs client state? Cache invalidation? SSR? Hydration? Rendering bottlenecks? Bundle optimization?</td></tr>
-<tr><td>Promoted early</td><td>When? From what to what? Evidence? Expanded scope? Example of independent delivery?</td></tr>
-<tr><td>Reduced bugs by 15%</td><td>How was bug rate defined? Time period? Baseline? Attribution? Specific tests/code-review practices?</td></tr>
-</tbody></table>
-<div class="danger"><b>Critical credibility rule:</b> Your resume contains strong quantified claims (~25%, 70%, 15%) and broad cloud/AI terms. Interviewers may probe these aggressively. Memorize the exact measurement method and your personal contribution. If a technology was only exposed to you rather than used deeply, state the level accurately.</div>
-</section>
-<section id="cloud" class="chapter searchable"><h2>12. Cloud, DevOps, CI/CD & Observability</h2>
-<table><thead><tr><th>Technology</th><th>Why it exists</th><th>Interview depth expected</th></tr></thead><tbody>
-<tr><td>AWS ECS</td><td>Managed orchestration for containers</td><td>Task definitions, services, desired count, load balancers, autoscaling, IAM roles, logs, deployment/rollback</td></tr>
-<tr><td>Lambda</td><td>Event-driven serverless compute</td><td>Cold starts, concurrency, timeout, retries, idempotency, DLQ/destinations, VPC trade-offs</td></tr>
-<tr><td>Step Functions</td><td>Durable workflow orchestration</td><td>State machines, retry/catch, Standard vs Express, task tokens, idempotency, cost trade-offs</td></tr>
-<tr><td>Docker</td><td>Portable process packaging and isolation</td><td>Images/layers, multi-stage builds, cache, non-root user, health checks, secrets, networking</td></tr>
-<tr><td>Kubernetes</td><td>Container orchestration at cluster scale</td><td>Pod, Deployment, Service, Ingress, ConfigMap/Secret, probes, HPA, requests/limits; be truthful if resume exposure is limited</td></tr>
-<tr><td>CI/CD</td><td>Automated, repeatable software delivery</td><td>Build, lint, tests, security checks, artifact, deploy, migration, smoke test, canary/blue-green, rollback</td></tr>
-</tbody></table>
-<details class="qa" data-level="senior"><summary><span class="badge">Senior</span>Design a safe CI/CD pipeline for your Node/Next platform.</summary><div class="answer">PR: lint, type-check, unit tests, integration tests, dependency/security scans. Merge: immutable artifact/image build, provenance, push to registry. Deploy to staging, run migrations with backward-compatible strategy, smoke/e2e tests, then progressive production rollout. Use environment protection, short-lived cloud credentials via OIDC where possible, secret manager, release markers in Sentry, automated health checks, and fast rollback. Database rollback requires special planning because code rollback does not automatically reverse data migrations.</div></details><details class="qa" data-level="advanced"><summary><span class="badge">Advanced</span>Lambda retry trap?</summary><div class="answer">Asynchronous invocations may retry, event-source mappings have their own retry/batch semantics, and duplicate processing is possible. Handlers should be idempotent. Understand concurrency bursts, downstream overload, reserved concurrency, DLQs/destinations, and partial batch failure behavior for queue/stream sources.</div></details>
-<h3>Observability model</h3><p><b>Logs</b> explain discrete events; <b>metrics</b> show trends and alertable aggregates; <b>traces</b> follow a request across components. Use correlation/trace IDs. Monitor latency, traffic, errors, saturation, queue depth/age, DB pool usage, dependency health, and business KPIs. Define SLOs before tuning alerts.</p>
-<div class="callout"><b>Rapid revision:</b> container image vs container, ECS task/service, Lambda idempotency, Step Functions retries, CI/CD rollback, zero-downtime migrations, logs vs metrics vs traces, Sentry release/source-map setup.</div></section>
-<section id="ai" class="chapter searchable"><h2>13. AI, LLM APIs, Agents & AI Dev Tools</h2>
-<div class="danger"><b>Resume sensitivity:</b> “AI agents,” “LLM-assisted credit scoring,” “70% faster,” and named AI coding tools invite deep cross-examination. Be ready to separate deterministic business logic from probabilistic LLM output and explain validation, privacy, evaluation, hallucination handling, and human oversight.</div>
-<details class="qa" data-level="intermediate"><summary><span class="badge">Intermediate</span>What is an AI agent in engineering terms?</summary><div class="answer">A useful definition: an LLM-driven system that can choose actions, call tools, observe results, maintain bounded state, and iterate toward a goal. Avoid calling every single LLM API call an agent. Discuss tool schemas, orchestration loop, permissions, budgets, stop conditions, retries, and auditability.</div></details><details class="qa" data-level="advanced"><summary><span class="badge">Advanced</span>How do you make structured LLM output reliable?</summary><div class="answer">Use schema-constrained outputs/function calling where supported, strict validation, bounded retries, deterministic parsing, explicit versioned schemas, fallbacks, observability, and test sets. Never trust model output as valid merely because it looks like JSON.</div></details><details class="qa" data-level="senior"><summary><span class="badge">Senior</span>Would you let an LLM directly determine a person&#x27;s credit decision?</summary><div class="answer">A safe engineering answer is to treat regulated/high-impact decisions with strong governance. Clarify the actual system boundary. LLMs should not silently become the authoritative decision-maker without validated policy, explainability, legal/compliance approval, bias testing, human oversight where required, auditability, and deterministic safeguards. Be precise about whether your project used an LLM for extraction, summarization, recommendation, workflow assistance, or actual scoring.</div></details><details class="qa" data-level="resume cross-examination"><summary><span class="badge">Resume Cross-Examination</span>How did AI tools make you 70% faster?</summary><div class="answer">Do not repeat the percentage without a measurement method. Explain the baseline tasks and period: scaffolding, test generation, refactoring, documentation, debugging hypotheses, or repetitive transformations. Then explain mandatory human review, tests, security checks, architecture ownership, and examples where you rejected incorrect AI output.</div></details>
-<h3>Must-master LLM production concerns</h3><p>Prompt injection, data exfiltration, tool permissions, schema validation, hallucinations, model/version drift, token limits, latency, cost, caching, retries, fallback models, evaluation datasets, human review, PII handling, audit logs, prompt/version tracking, deterministic safeguards, and least-privilege tools.</p></section>
-<section id="dsa" class="chapter searchable"><h2>14. DSA Roadmap — Product & Service Companies</h2>
-<div class="callout"><b>Target for 4.5+ years:</b> Product companies usually expect pattern recognition plus clean, tested, complexity-aware code. Service companies often mix DSA with JavaScript/React/Node fundamentals and resume-based questions.</div>
-<table><thead><tr><th>Pattern</th><th>Must-master problems</th><th>Core invariant</th></tr></thead><tbody>
-<tr><td>Arrays / Hashing</td><td>Two Sum, Group Anagrams, Product Except Self, Longest Consecutive</td><td>Trade memory for O(1)-average lookup</td></tr>
-<tr><td>Two Pointers</td><td>Valid Palindrome, 3Sum, Container With Most Water</td><td>Move the pointer that can improve the answer</td></tr>
-<tr><td>Sliding Window</td><td>Longest Substring, Character Replacement, Minimum Window</td><td>Maintain a valid/invalid window incrementally</td></tr>
-<tr><td>Stack</td><td>Valid Parentheses, Min Stack, Daily Temperatures, Largest Rectangle</td><td>Monotonic stack stores unresolved candidates</td></tr>
-<tr><td>Binary Search</td><td>Search Rotated Array, Min Rotated Array, Koko Eating Bananas</td><td>Search a monotonic decision space</td></tr>
-<tr><td>Linked List</td><td>Reverse, Cycle, Merge, Reorder, LRU Cache</td><td>Protect next pointers; dummy nodes simplify edges</td></tr>
-<tr><td>Trees</td><td>Depth, Diameter, Balanced, LCA, Serialize/Deserialize</td><td>Define exactly what DFS returns</td></tr>
-<tr><td>Heap</td><td>Kth Largest, Top K Frequent, Merge K Lists, Median Stream</td><td>Keep only the best k candidates when possible</td></tr>
-<tr><td>Backtracking</td><td>Subsets, Permutations, Combination Sum, Word Search, N-Queens</td><td>Choose → explore → undo</td></tr>
-<tr><td>Graphs</td><td>Number of Islands, Clone Graph, Course Schedule, Network Delay</td><td>Visited state + BFS/DFS/topological/shortest-path choice</td></tr>
-<tr><td>Dynamic Programming</td><td>Climbing Stairs, House Robber, Coin Change, LIS, Edit Distance</td><td>State, transition, base case, iteration order</td></tr>
-<tr><td>Trie</td><td>Implement Trie, Word Search II</td><td>Prefix sharing; memory trade-off</td></tr>
-</tbody></table>
-<h3>DSA answer protocol</h3>
-<ol><li>Restate input/output and constraints.</li><li>Ask edge cases and mutation rules.</li><li>Give brute force first if useful.</li><li>Identify the bottleneck and pattern.</li><li>State invariant before coding.</li><li>Write clean code.</li><li>Dry-run normal and edge cases.</li><li>State time and auxiliary space complexity.</li></ol>
-<details class="qa" data-level="hard coding"><summary><span class="badge">Hard Coding</span>Hard coding drill: LRU Cache</summary><div class="answer">Use a hash map from key to node plus a doubly linked list ordered by recency. <code>get</code> moves a node to most-recent position; <code>put</code> updates/inserts and evicts least-recent when capacity is exceeded. Both operations are O(1) average time; space O(capacity). Common mistakes: not updating existing keys, broken prev/next links, capacity 1, and returning stale values.</div></details>
-<h3>Blind 75 / NeetCode usage</h3><p>Use curated lists as pattern coverage, not as a memorization contest. For each solved problem, record: pattern, key invariant, failed approach, complexity, edge case, and next review date. Re-solve missed problems without looking at code.</p>
-<div class="callout"><b>Rapid revision:</b> Hashing, two pointers, sliding window, monotonic stack, binary search on answer, fast/slow pointers, tree DFS return contract, BFS levels, topological sort, union-find, heap top-k, backtracking template, DP state/transition/base/order.</div></section>
-<section id="behavioral" class="chapter searchable"><h2>15. HR & Behavioral Interviews — Tailored Answers</h2>
-<h3>Tell me about yourself</h3>
-<div class="answer polished">I’m Rajib Gupta, a Full Stack Product Engineer with 4.5+ years of experience building production systems across fintech and SaaS. My strongest stack is TypeScript, JavaScript, React, Next.js, Node.js, and relational and document databases including PostgreSQL, MySQL, and MongoDB. In my current role at Ogma Conceptions, I’ve owned features end to end—from clarifying requirements and designing APIs and schemas to building frontend workflows, background processing, deployment, and production monitoring. One of my key areas of work has been financial data pipelines integrating third-party providers such as Equifax and Experian, where I worked on orchestration, retries, error handling, and query optimization that reduced API response times by about 25%. I’m now looking for a role where I can work on larger-scale engineering problems, deepen my system-design expertise, and contribute as a strong full-stack engineer with end-to-end ownership.</div>
+      └──► Audit logs / Sentry / metrics / alerts</pre
+          >
+        </div>
+        <details class="qa" data-level="senior">
+          <summary>
+            <span class="badge">Senior</span>Walk me through the complete
+            request lifecycle in the credit platform.
+          </summary>
+          <div class="answer">
+            Ideal answer: A client sends an authenticated request. The API
+            validates schema and authorization, creates or reuses an idempotent
+            workflow record, persists durable state, and either returns
+            immediately with a job ID or starts bounded synchronous work. The
+            orchestrator dispatches provider-specific tasks. Workers call
+            Equifax/Experian through adapters with explicit timeouts, safe
+            retries with exponential backoff and jitter, rate-limit handling,
+            and correlation IDs. Results are normalized, validated, stored, and
+            passed to downstream scoring/LLM steps only when policy permits.
+            Final status is persisted and delivered by polling/webhook/UI.
+            Failures are classified as transient, permanent, or manual-review.
+            Metrics cover latency, error rate, queue depth, retries, provider
+            health, and workflow age.
+          </div>
+        </details>
+        <details class="qa" data-level="resume cross-examination">
+          <summary>
+            <span class="badge">Resume Cross-Examination</span>You claim ~25%
+            API response-time reduction. Prove it.
+          </summary>
+          <div class="answer">
+            Prepare exact before/after numbers, endpoint scope, sample size,
+            traffic profile, percentile used, and measurement tooling. A strong
+            answer: 'I profiled the slow endpoint, inspected query plans, found
+            an unindexed filter/join and unnecessary sequential calls, added the
+            correct composite index, reduced selected columns, and parallelized
+            independent I/O. p95 fell from X ms to Y ms under comparable load. I
+            checked write overhead and regression metrics after deployment.' Do
+            not rely only on an average if you can discuss p95/p99.
+          </div>
+        </details>
+        <details class="qa" data-level="senior">
+          <summary>
+            <span class="badge">Senior</span>Why both PostgreSQL and MongoDB?
+            Was polyglot persistence actually necessary?
+          </summary>
+          <div class="answer">
+            Say exactly which entities lived where. Use PostgreSQL for
+            transactional invariants, relational entities, constraints,
+            reporting, and workflow state. Use MongoDB only if flexible, nested,
+            high-variance third-party/LLM payloads or aggregate access patterns
+            materially justified it. Acknowledge operational complexity: two
+            backup strategies, consistency boundaries, monitoring, migrations,
+            and developer cognitive load. If one database could handle the use
+            case today, say so.
+          </div>
+        </details>
+        <details class="qa" data-level="faang">
+          <summary>
+            <span class="badge">FAANG</span>How do you prevent duplicate credit
+            pulls when a job retries?
+          </summary>
+          <div class="answer">
+            Use an idempotency key tied to the business operation, persist
+            operation state before external side effects, enforce a unique
+            constraint, check provider capabilities for their own idempotency
+            mechanism, and make consumers idempotent. Exactly-once processing is
+            usually achieved as effectively-once business behavior through
+            deduplication and transactional state—not by assuming the queue
+            delivers exactly once.
+          </div>
+        </details>
+        <details class="qa" data-level="faang">
+          <summary>
+            <span class="badge">FAANG</span>How would you scale this platform to
+            10 million workflows per day?
+          </summary>
+          <div class="answer">
+            Estimate throughput first. Partition asynchronous workloads by
+            tenant/workflow ID where ordering is needed. Autoscale workers based
+            on queue age and depth. Respect third-party quotas with token-bucket
+            rate limiting per provider. Cache only legally and semantically safe
+            data. Partition large tables when evidence supports it, archive cold
+            audit data, use read replicas for read-heavy reporting, isolate
+            analytical workloads, batch where allowed, and establish SLOs. The
+            third-party providers may be the real bottleneck, so backpressure
+            and graceful degradation are central.
+          </div>
+        </details>
+        <h3>Subscription Marketplace — SaaS / Workflow Automation</h3>
+        <details class="qa" data-level="senior">
+          <summary>
+            <span class="badge">Senior</span>Design the recurring subscription
+            lifecycle.
+          </summary>
+          <div class="answer">
+            Model explicit states: pending, trialing, active, past_due, paused,
+            canceled, expired. Treat the billing provider webhook as an
+            important external event source, but make processing idempotent and
+            reconcile periodically. Store provider customer/subscription IDs,
+            plan/version, billing period, next action, and event ledger. Never
+            grant entitlements solely from an unverified client redirect.
+          </div>
+        </details>
+        <details class="qa" data-level="advanced">
+          <summary>
+            <span class="badge">Advanced</span>How do you design RBAC?
+          </summary>
+          <div class="answer">
+            Define resources, actions, roles, and permissions. Avoid scattering
+            role-name checks throughout code; centralize authorization policies.
+            Enforce on the server and test deny-by-default behavior. For
+            multi-tenant SaaS, include tenant scope in every resource lookup and
+            authorization decision to prevent IDOR/BOLA vulnerabilities.
+          </div>
+        </details>
+        <details class="qa" data-level="senior">
+          <summary>
+            <span class="badge">Senior</span>How do cron jobs fail in
+            production?
+          </summary>
+          <div class="answer">
+            Duplicate execution across replicas, missed runs during downtime,
+            overlapping runs, timezone/DST errors, long-running jobs, partial
+            completion, and silent failures. Use distributed locks or a
+            scheduler with durable semantics, idempotent handlers, explicit time
+            zones, run history, heartbeats, retries, alerts, and reconciliation.
+          </div>
+        </details>
+        <h3>Trapeze Group — Enterprise Transit Management System</h3>
+        <details class="qa" data-level="resume cross-examination">
+          <summary>
+            <span class="badge">Resume Cross-Examination</span>How did reusable
+            Angular modules reduce bugs?
+          </summary>
+          <div class="answer">
+            A good answer connects reuse to consistent behavior, typed
+            interfaces, centralized fixes, design-system constraints, tests, and
+            code review. Be ready to name specific shared components/services,
+            the defect categories reduced, how the 15% figure was measured, and
+            whether there were trade-offs such as overly generic APIs or bundle
+            size.
+          </div>
+        </details>
+        <details class="qa" data-level="advanced">
+          <summary>
+            <span class="badge">Advanced</span>Angular change detection and
+            OnPush?
+          </summary>
+          <div class="answer">
+            Default change detection checks broadly after async events.
+            <code>OnPush</code> lets Angular skip a component subtree unless
+            inputs change by reference, an event occurs in the subtree, an
+            observable/async pipe emits, or change detection is explicitly
+            requested. Immutable state and observable patterns make OnPush more
+            predictable.
+          </div>
+        </details>
+      </section>
+      <section id="cross" class="chapter searchable">
+        <h2>11. Resume Cross-Examination — Every Claim Under Pressure</h2>
+        <p>
+          Use this section as an adversarial drill. For each resume claim,
+          answer in this order:
+          <b
+            >context → exact ownership → architecture → hardest decision →
+            measurable result → failure/trade-off → what you would change
+            now.</b
+          >
+        </p>
+        <table>
+          <thead>
+            <tr>
+              <th>Resume claim</th>
+              <th>Questions you must be able to answer</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Owned end-to-end delivery</td>
+              <td>
+                What did you personally design? Team size? What was inherited?
+                Who reviewed architecture? Which deployment steps did you own?
+                What production incident was yours to resolve?
+              </td>
+            </tr>
+            <tr>
+              <td>Ambiguous requirements</td>
+              <td>
+                Give one exact ambiguous requirement. What questions did you
+                ask? What assumptions were documented? How did you prevent
+                rework?
+              </td>
+            </tr>
+            <tr>
+              <td>Equifax/Experian pipelines</td>
+              <td>
+                Authentication method? Timeouts? Rate limits? Retry policy?
+                Idempotency? Schema mapping? PII handling? Sandbox vs
+                production? Provider outage behavior?
+              </td>
+            </tr>
+            <tr>
+              <td>Background queues</td>
+              <td>
+                Which queue technology? Delivery semantics? Visibility timeout?
+                Concurrency? Poison messages? DLQ? Ordering? Deduplication?
+                Backpressure?
+              </td>
+            </tr>
+            <tr>
+              <td>25% response improvement</td>
+              <td>
+                Which endpoint? Before/after p50/p95/p99? How measured? Query
+                plan? Index type? Dataset size? Regression risk? Write overhead?
+              </td>
+            </tr>
+            <tr>
+              <td>70% faster with AI tools</td>
+              <td>
+                How measured? Which tasks? How did you validate correctness?
+                What did AI get wrong? Security/privacy policy? Were secrets or
+                proprietary code exposed?
+              </td>
+            </tr>
+            <tr>
+              <td>High-volume transactional data</td>
+              <td>
+                Define high volume numerically: rows, GB, QPS, writes/sec.
+                Schema choices? Index cardinality? Lock contention?
+                Transactions? Backup/recovery?
+              </td>
+            </tr>
+            <tr>
+              <td>CI/CD and observability</td>
+              <td>
+                Pipeline stages? Branch strategy? Tests? Secrets? Rollback?
+                Deployment strategy? Sentry release mapping? Alerts? SLOs? MTTR?
+              </td>
+            </tr>
+            <tr>
+              <td>React/Next + Redux/RTK Query</td>
+              <td>
+                Why each tool? Server vs client state? Cache invalidation? SSR?
+                Hydration? Rendering bottlenecks? Bundle optimization?
+              </td>
+            </tr>
+            <tr>
+              <td>Promoted early</td>
+              <td>
+                When? From what to what? Evidence? Expanded scope? Example of
+                independent delivery?
+              </td>
+            </tr>
+            <tr>
+              <td>Reduced bugs by 15%</td>
+              <td>
+                How was bug rate defined? Time period? Baseline? Attribution?
+                Specific tests/code-review practices?
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="danger">
+          <b>Critical credibility rule:</b> Your resume contains strong
+          quantified claims (~25%, 70%, 15%) and broad cloud/AI terms.
+          Interviewers may probe these aggressively. Memorize the exact
+          measurement method and your personal contribution. If a technology was
+          only exposed to you rather than used deeply, state the level
+          accurately.
+        </div>
+      </section>
+      <section id="cloud" class="chapter searchable">
+        <h2>12. Cloud, DevOps, CI/CD & Observability</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Technology</th>
+              <th>Why it exists</th>
+              <th>Interview depth expected</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>AWS ECS</td>
+              <td>Managed orchestration for containers</td>
+              <td>
+                Task definitions, services, desired count, load balancers,
+                autoscaling, IAM roles, logs, deployment/rollback
+              </td>
+            </tr>
+            <tr>
+              <td>Lambda</td>
+              <td>Event-driven serverless compute</td>
+              <td>
+                Cold starts, concurrency, timeout, retries, idempotency,
+                DLQ/destinations, VPC trade-offs
+              </td>
+            </tr>
+            <tr>
+              <td>Step Functions</td>
+              <td>Durable workflow orchestration</td>
+              <td>
+                State machines, retry/catch, Standard vs Express, task tokens,
+                idempotency, cost trade-offs
+              </td>
+            </tr>
+            <tr>
+              <td>Docker</td>
+              <td>Portable process packaging and isolation</td>
+              <td>
+                Images/layers, multi-stage builds, cache, non-root user, health
+                checks, secrets, networking
+              </td>
+            </tr>
+            <tr>
+              <td>Kubernetes</td>
+              <td>Container orchestration at cluster scale</td>
+              <td>
+                Pod, Deployment, Service, Ingress, ConfigMap/Secret, probes,
+                HPA, requests/limits; be truthful if resume exposure is limited
+              </td>
+            </tr>
+            <tr>
+              <td>CI/CD</td>
+              <td>Automated, repeatable software delivery</td>
+              <td>
+                Build, lint, tests, security checks, artifact, deploy,
+                migration, smoke test, canary/blue-green, rollback
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <details class="qa" data-level="senior">
+          <summary>
+            <span class="badge">Senior</span>Design a safe CI/CD pipeline for
+            your Node/Next platform.
+          </summary>
+          <div class="answer">
+            PR: lint, type-check, unit tests, integration tests,
+            dependency/security scans. Merge: immutable artifact/image build,
+            provenance, push to registry. Deploy to staging, run migrations with
+            backward-compatible strategy, smoke/e2e tests, then progressive
+            production rollout. Use environment protection, short-lived cloud
+            credentials via OIDC where possible, secret manager, release markers
+            in Sentry, automated health checks, and fast rollback. Database
+            rollback requires special planning because code rollback does not
+            automatically reverse data migrations.
+          </div>
+        </details>
+        <details class="qa" data-level="advanced">
+          <summary>
+            <span class="badge">Advanced</span>Lambda retry trap?
+          </summary>
+          <div class="answer">
+            Asynchronous invocations may retry, event-source mappings have their
+            own retry/batch semantics, and duplicate processing is possible.
+            Handlers should be idempotent. Understand concurrency bursts,
+            downstream overload, reserved concurrency, DLQs/destinations, and
+            partial batch failure behavior for queue/stream sources.
+          </div>
+        </details>
+        <h3>Observability model</h3>
+        <p>
+          <b>Logs</b> explain discrete events; <b>metrics</b> show trends and
+          alertable aggregates; <b>traces</b> follow a request across
+          components. Use correlation/trace IDs. Monitor latency, traffic,
+          errors, saturation, queue depth/age, DB pool usage, dependency health,
+          and business KPIs. Define SLOs before tuning alerts.
+        </p>
+        <div class="callout">
+          <b>Rapid revision:</b> container image vs container, ECS task/service,
+          Lambda idempotency, Step Functions retries, CI/CD rollback,
+          zero-downtime migrations, logs vs metrics vs traces, Sentry
+          release/source-map setup.
+        </div>
+      </section>
+      <section id="ai" class="chapter searchable">
+        <h2>13. AI, LLM APIs, Agents & AI Dev Tools</h2>
+        <div class="danger">
+          <b>Resume sensitivity:</b> “AI agents,” “LLM-assisted credit scoring,”
+          “70% faster,” and named AI coding tools invite deep cross-examination.
+          Be ready to separate deterministic business logic from probabilistic
+          LLM output and explain validation, privacy, evaluation, hallucination
+          handling, and human oversight.
+        </div>
+        <details class="qa" data-level="intermediate">
+          <summary>
+            <span class="badge">Intermediate</span>What is an AI agent in
+            engineering terms?
+          </summary>
+          <div class="answer">
+            A useful definition: an LLM-driven system that can choose actions,
+            call tools, observe results, maintain bounded state, and iterate
+            toward a goal. Avoid calling every single LLM API call an agent.
+            Discuss tool schemas, orchestration loop, permissions, budgets, stop
+            conditions, retries, and auditability.
+          </div>
+        </details>
+        <details class="qa" data-level="advanced">
+          <summary>
+            <span class="badge">Advanced</span>How do you make structured LLM
+            output reliable?
+          </summary>
+          <div class="answer">
+            Use schema-constrained outputs/function calling where supported,
+            strict validation, bounded retries, deterministic parsing, explicit
+            versioned schemas, fallbacks, observability, and test sets. Never
+            trust model output as valid merely because it looks like JSON.
+          </div>
+        </details>
+        <details class="qa" data-level="senior">
+          <summary>
+            <span class="badge">Senior</span>Would you let an LLM directly
+            determine a person&#x27;s credit decision?
+          </summary>
+          <div class="answer">
+            A safe engineering answer is to treat regulated/high-impact
+            decisions with strong governance. Clarify the actual system
+            boundary. LLMs should not silently become the authoritative
+            decision-maker without validated policy, explainability,
+            legal/compliance approval, bias testing, human oversight where
+            required, auditability, and deterministic safeguards. Be precise
+            about whether your project used an LLM for extraction,
+            summarization, recommendation, workflow assistance, or actual
+            scoring.
+          </div>
+        </details>
+        <details class="qa" data-level="resume cross-examination">
+          <summary>
+            <span class="badge">Resume Cross-Examination</span>How did AI tools
+            make you 70% faster?
+          </summary>
+          <div class="answer">
+            Do not repeat the percentage without a measurement method. Explain
+            the baseline tasks and period: scaffolding, test generation,
+            refactoring, documentation, debugging hypotheses, or repetitive
+            transformations. Then explain mandatory human review, tests,
+            security checks, architecture ownership, and examples where you
+            rejected incorrect AI output.
+          </div>
+        </details>
+        <h3>Must-master LLM production concerns</h3>
+        <p>
+          Prompt injection, data exfiltration, tool permissions, schema
+          validation, hallucinations, model/version drift, token limits,
+          latency, cost, caching, retries, fallback models, evaluation datasets,
+          human review, PII handling, audit logs, prompt/version tracking,
+          deterministic safeguards, and least-privilege tools.
+        </p>
+      </section>
+      <section id="dsa" class="chapter searchable">
+        <h2>14. DSA Roadmap — Product & Service Companies</h2>
+        <div class="callout">
+          <b>Target for 4.5+ years:</b> Product companies usually expect pattern
+          recognition plus clean, tested, complexity-aware code. Service
+          companies often mix DSA with JavaScript/React/Node fundamentals and
+          resume-based questions.
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>Pattern</th>
+              <th>Must-master problems</th>
+              <th>Core invariant</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Arrays / Hashing</td>
+              <td>
+                Two Sum, Group Anagrams, Product Except Self, Longest
+                Consecutive
+              </td>
+              <td>Trade memory for O(1)-average lookup</td>
+            </tr>
+            <tr>
+              <td>Two Pointers</td>
+              <td>Valid Palindrome, 3Sum, Container With Most Water</td>
+              <td>Move the pointer that can improve the answer</td>
+            </tr>
+            <tr>
+              <td>Sliding Window</td>
+              <td>Longest Substring, Character Replacement, Minimum Window</td>
+              <td>Maintain a valid/invalid window incrementally</td>
+            </tr>
+            <tr>
+              <td>Stack</td>
+              <td>
+                Valid Parentheses, Min Stack, Daily Temperatures, Largest
+                Rectangle
+              </td>
+              <td>Monotonic stack stores unresolved candidates</td>
+            </tr>
+            <tr>
+              <td>Binary Search</td>
+              <td>
+                Search Rotated Array, Min Rotated Array, Koko Eating Bananas
+              </td>
+              <td>Search a monotonic decision space</td>
+            </tr>
+            <tr>
+              <td>Linked List</td>
+              <td>Reverse, Cycle, Merge, Reorder, LRU Cache</td>
+              <td>Protect next pointers; dummy nodes simplify edges</td>
+            </tr>
+            <tr>
+              <td>Trees</td>
+              <td>Depth, Diameter, Balanced, LCA, Serialize/Deserialize</td>
+              <td>Define exactly what DFS returns</td>
+            </tr>
+            <tr>
+              <td>Heap</td>
+              <td>Kth Largest, Top K Frequent, Merge K Lists, Median Stream</td>
+              <td>Keep only the best k candidates when possible</td>
+            </tr>
+            <tr>
+              <td>Backtracking</td>
+              <td>
+                Subsets, Permutations, Combination Sum, Word Search, N-Queens
+              </td>
+              <td>Choose → explore → undo</td>
+            </tr>
+            <tr>
+              <td>Graphs</td>
+              <td>
+                Number of Islands, Clone Graph, Course Schedule, Network Delay
+              </td>
+              <td>Visited state + BFS/DFS/topological/shortest-path choice</td>
+            </tr>
+            <tr>
+              <td>Dynamic Programming</td>
+              <td>
+                Climbing Stairs, House Robber, Coin Change, LIS, Edit Distance
+              </td>
+              <td>State, transition, base case, iteration order</td>
+            </tr>
+            <tr>
+              <td>Trie</td>
+              <td>Implement Trie, Word Search II</td>
+              <td>Prefix sharing; memory trade-off</td>
+            </tr>
+          </tbody>
+        </table>
+        <h3>DSA answer protocol</h3>
+        <ol>
+          <li>Restate input/output and constraints.</li>
+          <li>Ask edge cases and mutation rules.</li>
+          <li>Give brute force first if useful.</li>
+          <li>Identify the bottleneck and pattern.</li>
+          <li>State invariant before coding.</li>
+          <li>Write clean code.</li>
+          <li>Dry-run normal and edge cases.</li>
+          <li>State time and auxiliary space complexity.</li>
+        </ol>
+        <details class="qa" data-level="hard coding">
+          <summary>
+            <span class="badge">Hard Coding</span>Hard coding drill: LRU Cache
+          </summary>
+          <div class="answer">
+            Use a hash map from key to node plus a doubly linked list ordered by
+            recency. <code>get</code> moves a node to most-recent position;
+            <code>put</code> updates/inserts and evicts least-recent when
+            capacity is exceeded. Both operations are O(1) average time; space
+            O(capacity). Common mistakes: not updating existing keys, broken
+            prev/next links, capacity 1, and returning stale values.
+          </div>
+        </details>
+        <h3>Blind 75 / NeetCode usage</h3>
+        <p>
+          Use curated lists as pattern coverage, not as a memorization contest.
+          For each solved problem, record: pattern, key invariant, failed
+          approach, complexity, edge case, and next review date. Re-solve missed
+          problems without looking at code.
+        </p>
+        <div class="callout">
+          <b>Rapid revision:</b> Hashing, two pointers, sliding window,
+          monotonic stack, binary search on answer, fast/slow pointers, tree DFS
+          return contract, BFS levels, topological sort, union-find, heap top-k,
+          backtracking template, DP state/transition/base/order.
+        </div>
+      </section>
+      <section id="behavioral" class="chapter searchable">
+        <h2>15. HR & Behavioral Interviews — Tailored Answers</h2>
+        <h3>Tell me about yourself</h3>
+        <div class="answer polished">
+          I’m Rajib Gupta, a Full Stack Product Engineer with 4.5+ years of
+          experience building production systems across fintech and SaaS. My
+          strongest stack is TypeScript, JavaScript, React, Next.js, Node.js,
+          and relational and document databases including PostgreSQL, MySQL, and
+          MongoDB. In my current role at Ogma Conceptions, I’ve owned features
+          end to end—from clarifying requirements and designing APIs and schemas
+          to building frontend workflows, background processing, deployment, and
+          production monitoring. One of my key areas of work has been financial
+          data pipelines integrating third-party providers such as Equifax and
+          Experian, where I worked on orchestration, retries, error handling,
+          and query optimization that reduced API response times by about 25%.
+          I’m now looking for a role where I can work on larger-scale
+          engineering problems, deepen my system-design expertise, and
+          contribute as a strong full-stack engineer with end-to-end ownership.
+        </div>
 
-<h3>Why are you leaving?</h3>
-<div class="answer polished">I’ve gained strong end-to-end ownership in my current role and have had the opportunity to work across frontend, backend, databases, integrations, and production operations. I’m now looking for a larger engineering environment where I can solve higher-scale problems, learn from strong peers, and take on deeper technical challenges in system design, distributed systems, and product engineering. I’m not running away from my current role; I’m moving toward greater technical scope and growth.</div>
+        <h3>Why are you leaving?</h3>
+        <div class="answer polished">
+          I’ve gained strong end-to-end ownership in my current role and have
+          had the opportunity to work across frontend, backend, databases,
+          integrations, and production operations. I’m now looking for a larger
+          engineering environment where I can solve higher-scale problems, learn
+          from strong peers, and take on deeper technical challenges in system
+          design, distributed systems, and product engineering. I’m not running
+          away from my current role; I’m moving toward greater technical scope
+          and growth.
+        </div>
 
-<h3>Why should we hire you?</h3>
-<div class="answer polished">I bring a combination of hands-on full-stack depth and production ownership. I can work across React and Next.js interfaces, Node.js APIs, database design and optimization, asynchronous workflows, third-party integrations, CI/CD, and observability. I’ve worked on systems where reliability, retries, data correctness, and performance matter, particularly in fintech workflows. I also focus on understanding trade-offs rather than simply using tools by habit. For this role, I would bring the ability to independently take a problem from ambiguous requirements to a production-ready solution while collaborating effectively with the wider team.</div>
+        <h3>Why should we hire you?</h3>
+        <div class="answer polished">
+          I bring a combination of hands-on full-stack depth and production
+          ownership. I can work across React and Next.js interfaces, Node.js
+          APIs, database design and optimization, asynchronous workflows,
+          third-party integrations, CI/CD, and observability. I’ve worked on
+          systems where reliability, retries, data correctness, and performance
+          matter, particularly in fintech workflows. I also focus on
+          understanding trade-offs rather than simply using tools by habit. For
+          this role, I would bring the ability to independently take a problem
+          from ambiguous requirements to a production-ready solution while
+          collaborating effectively with the wider team.
+        </div>
 
-<h3>Behavioral story bank you must prepare</h3>
-<table><thead><tr><th>Competency</th><th>Your best resume-based story</th><th>Evidence to prepare</th></tr></thead><tbody>
-<tr><td>Ownership</td><td>End-to-end fintech platform delivery</td><td>Scope, team, decisions, deployment, outcome</td></tr>
-<tr><td>Performance</td><td>~25% API latency reduction</td><td>Before/after percentiles, profiler/query plan</td></tr>
-<tr><td>Reliability</td><td>Retries, structured errors, background jobs</td><td>Failure modes, idempotency, DLQ, alerts</td></tr>
-<tr><td>Quality</td><td>15% production bug reduction at Trapeze</td><td>Baseline, test strategy, code-review changes</td></tr>
-<tr><td>Learning</td><td>AI-assisted development workflow</td><td>Validation, failures caught, security boundaries</td></tr>
-<tr><td>Leadership</td><td>Early promotion and independent delivery</td><td>Scope expansion and stakeholder trust</td></tr>
-</tbody></table>
-<p>Use STAR, but keep Situation and Task short. Spend most time on Actions you personally took, technical decisions, trade-offs, measurable Result, and Reflection.</p>
+        <h3>Behavioral story bank you must prepare</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Competency</th>
+              <th>Your best resume-based story</th>
+              <th>Evidence to prepare</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Ownership</td>
+              <td>End-to-end fintech platform delivery</td>
+              <td>Scope, team, decisions, deployment, outcome</td>
+            </tr>
+            <tr>
+              <td>Performance</td>
+              <td>~25% API latency reduction</td>
+              <td>Before/after percentiles, profiler/query plan</td>
+            </tr>
+            <tr>
+              <td>Reliability</td>
+              <td>Retries, structured errors, background jobs</td>
+              <td>Failure modes, idempotency, DLQ, alerts</td>
+            </tr>
+            <tr>
+              <td>Quality</td>
+              <td>15% production bug reduction at Trapeze</td>
+              <td>Baseline, test strategy, code-review changes</td>
+            </tr>
+            <tr>
+              <td>Learning</td>
+              <td>AI-assisted development workflow</td>
+              <td>Validation, failures caught, security boundaries</td>
+            </tr>
+            <tr>
+              <td>Leadership</td>
+              <td>Early promotion and independent delivery</td>
+              <td>Scope expansion and stakeholder trust</td>
+            </tr>
+          </tbody>
+        </table>
+        <p>
+          Use STAR, but keep Situation and Task short. Spend most time on
+          Actions you personally took, technical decisions, trade-offs,
+          measurable Result, and Reflection.
+        </p>
 
-<h3>Salary expectations</h3><div class="answer polished">I’m primarily evaluating the role based on scope, engineering quality, growth opportunity, and overall fit. For compensation, I’m looking for a market-aligned package for a full-stack engineer with 4.5+ years of production experience, considering the complete structure including fixed pay, variable pay, equity where applicable, and benefits. I’d be happy to discuss a reasonable range once we align on the role level and expectations.</div>
-<div class="callout"><b>Rapid revision:</b> Prepare 8 stories: ownership, conflict, failure, incident, performance improvement, ambiguous requirement, leadership, and learning. Every story needs your personal actions and measurable evidence.</div></section>
-<section id="rapid" class="chapter searchable"><h2>16. Revise in 10 Minutes</h2>
-<div class="grid">
-<div class="card"><h3>JavaScript in 10 minutes</h3><p>Scope → closure → <code>this</code> → prototype → event loop → promises → async/await → modules → memory → debounce/throttle.</p></div>
-<div class="card"><h3>React in 10 minutes</h3><p>Render triggers → reconciliation/keys → hooks rules → effect lifecycle → state ownership → context → Redux/RTK Query → memoization → profiling → SSR/RSC boundaries.</p></div>
-<div class="card"><h3>Node in 10 minutes</h3><p>Event loop → libuv → async I/O → streams/backpressure → worker threads → API middleware → validation → errors → security → horizontal scaling.</p></div>
-<div class="card"><h3>Database in 10 minutes</h3><p>Schema → keys → normalization → indexes → query plans → transactions/isolation → MVCC → replication → partitioning/sharding → backups.</p></div>
-<div class="card"><h3>System design in 10 minutes</h3><p>Requirements → estimates → API → data model → HLD → bottlenecks → cache → queue → reliability → consistency → security → observability → trade-offs.</p></div>
-<div class="card"><h3>Resume in 10 minutes</h3><p>Exact metrics for 25%, 70%, 15%; queue technology; cloud depth; provider integration details; biggest incident; hardest trade-off; personal ownership.</p></div>
-</div>
-</section>
+        <h3>Salary expectations</h3>
+        <div class="answer polished">
+          I’m primarily evaluating the role based on scope, engineering quality,
+          growth opportunity, and overall fit. For compensation, I’m looking for
+          a market-aligned package for a full-stack engineer with 4.5+ years of
+          production experience, considering the complete structure including
+          fixed pay, variable pay, equity where applicable, and benefits. I’d be
+          happy to discuss a reasonable range once we align on the role level
+          and expectations.
+        </div>
+        <div class="callout">
+          <b>Rapid revision:</b> Prepare 8 stories: ownership, conflict,
+          failure, incident, performance improvement, ambiguous requirement,
+          leadership, and learning. Every story needs your personal actions and
+          measurable evidence.
+        </div>
+      </section>
+      <section id="rapid" class="chapter searchable">
+        <h2>16. Revise in 10 Minutes</h2>
+        <div class="grid">
+          <div class="card">
+            <h3>JavaScript in 10 minutes</h3>
+            <p>
+              Scope → closure → <code>this</code> → prototype → event loop →
+              promises → async/await → modules → memory → debounce/throttle.
+            </p>
+          </div>
+          <div class="card">
+            <h3>React in 10 minutes</h3>
+            <p>
+              Render triggers → reconciliation/keys → hooks rules → effect
+              lifecycle → state ownership → context → Redux/RTK Query →
+              memoization → profiling → SSR/RSC boundaries.
+            </p>
+          </div>
+          <div class="card">
+            <h3>Node in 10 minutes</h3>
+            <p>
+              Event loop → libuv → async I/O → streams/backpressure → worker
+              threads → API middleware → validation → errors → security →
+              horizontal scaling.
+            </p>
+          </div>
+          <div class="card">
+            <h3>Database in 10 minutes</h3>
+            <p>
+              Schema → keys → normalization → indexes → query plans →
+              transactions/isolation → MVCC → replication →
+              partitioning/sharding → backups.
+            </p>
+          </div>
+          <div class="card">
+            <h3>System design in 10 minutes</h3>
+            <p>
+              Requirements → estimates → API → data model → HLD → bottlenecks →
+              cache → queue → reliability → consistency → security →
+              observability → trade-offs.
+            </p>
+          </div>
+          <div class="card">
+            <h3>Resume in 10 minutes</h3>
+            <p>
+              Exact metrics for 25%, 70%, 15%; queue technology; cloud depth;
+              provider integration details; biggest incident; hardest trade-off;
+              personal ownership.
+            </p>
+          </div>
+        </div>
+      </section>
 
-<section id="flashcards" class="chapter searchable"><h2>17. Interactive Flashcards</h2>
-<div id="flashcard" class="card flashcard" onclick="flipCard()">Click “Next card” to begin.</div>
-<div class="toolbar"><button onclick="nextCard()">Next card</button><button onclick="markStudied()">Mark studied</button>
-<select id="difficulty"><option>All levels</option><option>Beginner</option><option>Intermediate</option><option>Advanced</option><option>Senior</option><option>FAANG</option></select></div></section>
+      <section id="flashcards" class="chapter searchable">
+        <h2>17. Interactive Flashcards</h2>
+        <div id="flashcard" class="card flashcard" onclick="flipCard()">
+          Click “Next card” to begin.
+        </div>
+        <div class="toolbar">
+          <button onclick="nextCard()">Next card</button
+          ><button onclick="markStudied()">Mark studied</button>
+          <select id="difficulty">
+            <option>All levels</option>
+            <option>Beginner</option>
+            <option>Intermediate</option>
+            <option>Advanced</option>
+            <option>Senior</option>
+            <option>FAANG</option>
+          </select>
+        </div>
+      </section>
 
-<section id="notes"><h2>18. My Interview Notes</h2><p>Your notes are stored locally in this browser.</p>
-<textarea id="notearea" class="notearea" placeholder="Write your weak areas, mock interview mistakes, exact project metrics, and follow-up questions here..."></textarea>
-<div class="toolbar"><button onclick="saveNotes()">Save notes</button><button onclick="clearNotes()">Clear notes</button></div></section>
+      <section id="notes">
+        <h2>18. My Interview Notes</h2>
+        <p>Your notes are stored locally in this browser.</p>
+        <textarea
+          id="notearea"
+          class="notearea"
+          placeholder="Write your weak areas, mock interview mistakes, exact project metrics, and follow-up questions here..."
+        ></textarea>
+        <div class="toolbar">
+          <button onclick="saveNotes()">Save notes</button
+          ><button onclick="clearNotes()">Clear notes</button>
+        </div>
+      </section>
 
-<section class="chapter"><h2>Final Mastery Checklist</h2>
-<div class="card"><label><input type="checkbox" class="study"> I can explain every resume bullet with exact personal ownership and evidence.</label><br>
-<label><input type="checkbox" class="study"> I can defend the 25%, 70%, and 15% metrics.</label><br>
-<label><input type="checkbox" class="study"> I can design the credit platform from scratch and discuss failures.</label><br>
-<label><input type="checkbox" class="study"> I can explain JavaScript event loop, closure, prototype and async behavior deeply.</label><br>
-<label><input type="checkbox" class="study"> I can explain React rendering, Fiber, hooks, state management and performance.</label><br>
-<label><input type="checkbox" class="study"> I can explain Node concurrency, streams, scaling and API security.</label><br>
-<label><input type="checkbox" class="study"> I can read query plans and explain indexes, transactions and isolation.</label><br>
-<label><input type="checkbox" class="study"> I can solve common medium DSA problems under time pressure.</label><br>
-<label><input type="checkbox" class="study"> I can conduct a 45-minute system design interview with trade-offs.</label><br>
-<label><input type="checkbox" class="study"> I have 8 polished behavioral stories with measurable outcomes.</label></div>
-</section>
+      <section class="chapter">
+        <h2>Final Mastery Checklist</h2>
+        <div class="card">
+          <label
+            ><input type="checkbox" class="study" /> I can explain every resume
+            bullet with exact personal ownership and evidence.</label
+          ><br />
+          <label
+            ><input type="checkbox" class="study" /> I can defend the 25%, 70%,
+            and 15% metrics.</label
+          ><br />
+          <label
+            ><input type="checkbox" class="study" /> I can design the credit
+            platform from scratch and discuss failures.</label
+          ><br />
+          <label
+            ><input type="checkbox" class="study" /> I can explain JavaScript
+            event loop, closure, prototype and async behavior deeply.</label
+          ><br />
+          <label
+            ><input type="checkbox" class="study" /> I can explain React
+            rendering, Fiber, hooks, state management and performance.</label
+          ><br />
+          <label
+            ><input type="checkbox" class="study" /> I can explain Node
+            concurrency, streams, scaling and API security.</label
+          ><br />
+          <label
+            ><input type="checkbox" class="study" /> I can read query plans and
+            explain indexes, transactions and isolation.</label
+          ><br />
+          <label
+            ><input type="checkbox" class="study" /> I can solve common medium
+            DSA problems under time pressure.</label
+          ><br />
+          <label
+            ><input type="checkbox" class="study" /> I can conduct a 45-minute
+            system design interview with trade-offs.</label
+          ><br />
+          <label
+            ><input type="checkbox" class="study" /> I have 8 polished
+            behavioral stories with measurable outcomes.</label
+          >
+        </div>
+      </section>
 
-<script>
-const cards=[
-["What is a closure?","A function plus access to its lexical environment even after the outer function returns."],
-["Microtask vs task?","Promise reactions and queueMicrotask drain before the next timer/I/O task when the stack is empty."],
-["What triggers React rendering?","Local state, parent render, consumed context change, or external-store subscription update."],
-["Why are stable keys important?","They preserve logical identity across reconciliation and prevent state attaching to the wrong item."],
-["Node concurrency?","JS runs on the event-loop thread while OS/libuv handles async work; worker threads enable CPU parallelism."],
-["Backpressure?","A mechanism that prevents a fast producer from overwhelming a slower consumer."],
-["Idempotency?","Repeating an operation has the same intended effect as performing it once."],
-["Why can indexes hurt?","Write amplification, storage/memory cost, and poor selectivity or plan choices."],
-["CAP theorem?","During a network partition, choose consistency or availability for affected operations."],
-["Queue retry trap?","Duplicate delivery is possible; consumers and side effects must be idempotent."],
-["JWT trap?","JWT is signed, not necessarily encrypted, and revocation is harder than with server-side sessions."],
-["What should p95 mean in your 25% claim?","95% of measured requests completed at or below that latency; compare like-for-like traffic."],
-["Why both PostgreSQL and MongoDB?","Only when distinct relational and document-shaped access patterns justify polyglot operational complexity."],
-["LLM structured output?","Schema constraints plus strict validation, retries, versioning, fallbacks and evaluation."],
-["System design first step?","Clarify functional and non-functional requirements before choosing technologies."]
-];
-let ci=-1, flipped=false, studied=Number(localStorage.getItem("studied")||0);
-function nextCard(){ci=(ci+1)%cards.length;flipped=false;document.getElementById("flashcard").textContent=cards[ci][0];}
-function flipCard(){if(ci<0)return;flipped=!flipped;document.getElementById("flashcard").textContent=cards[ci][flipped?1:0];}
-function markStudied(){studied++;localStorage.setItem("studied",studied);updateProgress();}
-function updateProgress(){let checks=[...document.querySelectorAll(".study")];let checked=checks.filter(x=>x.checked).length;let pct=Math.min(100,Math.round((studied+checked)/(cards.length+checks.length)*100));document.getElementById("progress").style.width=pct+"%";document.getElementById("progressText").textContent=pct;}
-document.querySelectorAll(".study").forEach((x,i)=>{x.checked=localStorage.getItem("check"+i)==="1";x.onchange=()=>{localStorage.setItem("check"+i,x.checked?"1":"0");updateProgress()}});
-function toggleDark(){document.body.classList.toggle("dark");localStorage.setItem("dark",document.body.classList.contains("dark")?"1":"0");}
-if(localStorage.getItem("dark")==="1")document.body.classList.add("dark");
-function openAll(){document.querySelectorAll("details.qa").forEach(x=>x.open=true)}
-document.getElementById("search").addEventListener("input",e=>{let q=e.target.value.toLowerCase();document.querySelectorAll(".searchable").forEach(s=>s.classList.toggle("hidden",q && !s.innerText.toLowerCase().includes(q)));});
-function saveNotes(){localStorage.setItem("interviewNotes",document.getElementById("notearea").value);alert("Notes saved locally.");}
-function clearNotes(){if(confirm("Clear saved notes?")){localStorage.removeItem("interviewNotes");document.getElementById("notearea").value="";}}
-document.getElementById("notearea").value=localStorage.getItem("interviewNotes")||"";
-updateProgress();
-</script>
-</main></body></html>
+      <script>
+        const cards = [
+          [
+            "What is a closure?",
+            "A function plus access to its lexical environment even after the outer function returns.",
+          ],
+          [
+            "Microtask vs task?",
+            "Promise reactions and queueMicrotask drain before the next timer/I/O task when the stack is empty.",
+          ],
+          [
+            "What triggers React rendering?",
+            "Local state, parent render, consumed context change, or external-store subscription update.",
+          ],
+          [
+            "Why are stable keys important?",
+            "They preserve logical identity across reconciliation and prevent state attaching to the wrong item.",
+          ],
+          [
+            "Node concurrency?",
+            "JS runs on the event-loop thread while OS/libuv handles async work; worker threads enable CPU parallelism.",
+          ],
+          [
+            "Backpressure?",
+            "A mechanism that prevents a fast producer from overwhelming a slower consumer.",
+          ],
+          [
+            "Idempotency?",
+            "Repeating an operation has the same intended effect as performing it once.",
+          ],
+          [
+            "Why can indexes hurt?",
+            "Write amplification, storage/memory cost, and poor selectivity or plan choices.",
+          ],
+          [
+            "CAP theorem?",
+            "During a network partition, choose consistency or availability for affected operations.",
+          ],
+          [
+            "Queue retry trap?",
+            "Duplicate delivery is possible; consumers and side effects must be idempotent.",
+          ],
+          [
+            "JWT trap?",
+            "JWT is signed, not necessarily encrypted, and revocation is harder than with server-side sessions.",
+          ],
+          [
+            "What should p95 mean in your 25% claim?",
+            "95% of measured requests completed at or below that latency; compare like-for-like traffic.",
+          ],
+          [
+            "Why both PostgreSQL and MongoDB?",
+            "Only when distinct relational and document-shaped access patterns justify polyglot operational complexity.",
+          ],
+          [
+            "LLM structured output?",
+            "Schema constraints plus strict validation, retries, versioning, fallbacks and evaluation.",
+          ],
+          [
+            "System design first step?",
+            "Clarify functional and non-functional requirements before choosing technologies.",
+          ],
+        ];
+        let ci = -1,
+          flipped = false,
+          studied = Number(localStorage.getItem("studied") || 0);
+        function nextCard() {
+          ci = (ci + 1) % cards.length;
+          flipped = false;
+          document.getElementById("flashcard").textContent = cards[ci][0];
+        }
+        function flipCard() {
+          if (ci < 0) return;
+          flipped = !flipped;
+          document.getElementById("flashcard").textContent =
+            cards[ci][flipped ? 1 : 0];
+        }
+        function markStudied() {
+          studied++;
+          localStorage.setItem("studied", studied);
+          updateProgress();
+        }
+        function updateProgress() {
+          let checks = [...document.querySelectorAll(".study")];
+          let checked = checks.filter((x) => x.checked).length;
+          let pct = Math.min(
+            100,
+            Math.round(
+              ((studied + checked) / (cards.length + checks.length)) * 100,
+            ),
+          );
+          document.getElementById("progress").style.width = pct + "%";
+          document.getElementById("progressText").textContent = pct;
+        }
+        document.querySelectorAll(".study").forEach((x, i) => {
+          x.checked = localStorage.getItem("check" + i) === "1";
+          x.onchange = () => {
+            localStorage.setItem("check" + i, x.checked ? "1" : "0");
+            updateProgress();
+          };
+        });
+        function toggleDark() {
+          document.body.classList.toggle("dark");
+          localStorage.setItem(
+            "dark",
+            document.body.classList.contains("dark") ? "1" : "0",
+          );
+        }
+        if (localStorage.getItem("dark") === "1")
+          document.body.classList.add("dark");
+        function openAll() {
+          document
+            .querySelectorAll("details.qa")
+            .forEach((x) => (x.open = true));
+        }
+        document.getElementById("search").addEventListener("input", (e) => {
+          let q = e.target.value.toLowerCase();
+          document
+            .querySelectorAll(".searchable")
+            .forEach((s) =>
+              s.classList.toggle(
+                "hidden",
+                q && !s.innerText.toLowerCase().includes(q),
+              ),
+            );
+        });
+        function saveNotes() {
+          localStorage.setItem(
+            "interviewNotes",
+            document.getElementById("notearea").value,
+          );
+          alert("Notes saved locally.");
+        }
+        function clearNotes() {
+          if (confirm("Clear saved notes?")) {
+            localStorage.removeItem("interviewNotes");
+            document.getElementById("notearea").value = "";
+          }
+        }
+        document.getElementById("notearea").value =
+          localStorage.getItem("interviewNotes") || "";
+        updateProgress();
+      </script>
+    </main>
+  </body>
+</html>
