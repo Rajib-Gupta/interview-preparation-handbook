@@ -1275,15 +1275,21 @@ State/Props/Context/Store update
           <div class="answer">
             <b>Cluster:</b> Multiple Node.js processes sharing the same port,
             each with its own event loop and memory. Good for scaling I/O-bound
-            workloads across CPU cores. <b>Worker Threads:</b> Multiple threads
-            within a single process, sharing memory. Suitable for CPU-bound
-            tasks that need shared state. example: <code>new Worker()</code>.
-            <b>Child Processes:</b> Separate OS processes that can run any
-            executable, communicate via IPC(Inter-Process Communication). Useful
-            for isolation or running non-Node.js code. examples:
-            <code>cluster.fork()</code>, <code>new Worker()</code>, and
-            <code>child_process.fork()</code>.
+            workloads across CPU cores. example: <code>cluster.fork()</code>.
+            <b>Worker Threads:</b> Multiple threads within a single process,
+            sharing memory. Suitable for CPU-bound tasks that need shared state.
+            example: <code>new Worker()</code>. <b>Child Processes:</b> Separate
+            OS processes that can run any executable, communicate via
+            IPC(Inter-Process Communication). Useful for isolation or running
+            non-Node.js code. examples: <code>cluster.fork()</code>,
+            <code>new Worker()</code>, and <code>child_process.fork()</code>.
           </div>
+          <pre><code>const { Worker } = require('worker_threads');
+const worker = new Worker('./worker.js');
+worker.on('message', (msg) => {
+     console.log('Message from worker:', msg);
+});
+</code></pre>
         </details>
         <details class="qa" data-level="faang">
           <summary>
