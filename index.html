@@ -715,9 +715,9 @@ TypeScript Source → Parse → Type Check → Control Flow Analysis → Emit Ja
           unions; intersections; literal types; narrowing; discriminated unions;
           generics and constraints; utility types; mapped types; conditional
           types; indexed access; <code>keyof</code>; template literal types;
-          declaration files; module resolution; <code>tsconfig</code>
-          strictness flags; <code>unknown</code> vs <code>any</code>;
-          <code>never</code>; variance basics; and runtime validation boundaries.
+          declaration files; module resolution; <code>tsconfig</code> strictness
+          flags; <code>unknown</code> vs <code>any</code>; <code>never</code>;
+          variance basics; and runtime validation boundaries.
         </p>
         <details class="qa" data-level="beginner">
           <summary>
@@ -735,19 +735,23 @@ TypeScript Source → Parse → Type Check → Control Flow Analysis → Emit Ja
         <details class="qa" data-level="intermediate">
           <summary>
             <span class="badge">Intermediate</span><code>any</code> vs
-            <code>unknown</code>?
+            <code>unknown</code> vs <code>never</code>?
           </summary>
           <div class="answer">
             <code>any</code> disables type safety and allows any operation.
             <code>unknown</code> is a safer top type: you must narrow or assert
             before using it. Prefer <code>unknown</code> for untrusted values,
-            then apply type guards or schema validation.
+            then apply type guards or schema validation. <code>never</code> is
+            the bottom type: it represents code that cannot be reached or a
+            function that never returns. It is useful for exhaustive checks and
+            signaling impossible states. 
+            
           </div>
         </details>
         <details class="qa" data-level="intermediate">
           <summary>
-            <span class="badge">Intermediate</span>Interface vs type alias:
-            how do you choose?
+            <span class="badge">Intermediate</span>Interface vs type alias: how
+            do you choose?
           </summary>
           <div class="answer">
             Both can model object shapes. Interfaces support declaration merging
@@ -797,8 +801,8 @@ TypeScript Source → Parse → Type Check → Control Flow Analysis → Emit Ja
         </details>
         <details class="qa" data-level="senior">
           <summary>
-            <span class="badge">Senior</span>Why can "type-safe" code still
-            fail in production?
+            <span class="badge">Senior</span>Why can "type-safe" code still fail
+            in production?
           </summary>
           <div class="answer">
             TypeScript types describe assumptions at compile time, but runtime
@@ -1010,9 +1014,9 @@ State/Props/Context/Store update
                 <b>Measure before you optimize.</b>
                 <ul>
                   <li>
-                    <b>Chrome DevTools Performance:</b> Record while
-                    reproducing slowness, inspect flame graph blocks, and look
-                    for long tasks (&gt;50ms) blocking the main thread.
+                    <b>Chrome DevTools Performance:</b> Record while reproducing
+                    slowness, inspect flame graph blocks, and look for long
+                    tasks (&gt;50ms) blocking the main thread.
                   </li>
                   <li>
                     <b>React DevTools Profiler:</b> Record a render, inspect
@@ -1058,7 +1062,9 @@ State/Props/Context/Store update
                     </tr>
                     <tr>
                       <td>List scrolling is janky</td>
-                      <td>Rendering thousands of DOM nodes without virtualization.</td>
+                      <td>
+                        Rendering thousands of DOM nodes without virtualization.
+                      </td>
                     </tr>
                     <tr>
                       <td>Gets slow after some usage</td>
