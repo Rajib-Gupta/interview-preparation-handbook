@@ -744,8 +744,7 @@ TypeScript Source → Parse → Type Check → Control Flow Analysis → Emit Ja
             then apply type guards or schema validation. <code>never</code> is
             the bottom type: it represents code that cannot be reached or a
             function that never returns. It is useful for exhaustive checks and
-            signaling impossible states. 
-            
+            signaling impossible states.
           </div>
         </details>
         <details class="qa" data-level="intermediate">
@@ -1177,12 +1176,13 @@ State/Props/Context/Store update
             hand-waving.
           </summary>
           <div class="answer">
-            Separate browser/CDN cache, full-route cache, data/request cache,
-            request memoization, and application-level caches. Exact semantics
-            vary by Next.js version, so in an interview state the version you
-            used. Explain what is static or dynamic, revalidation triggers,
-            cache tags/paths if used, and authentication/personalization
-            boundaries.
+            Next.js caching is a multi-layered system. The CDN caches static
+            assets and ISR pages according to <code>Cache-Control</code> headers
+            and revalidation settings. The server runtime may cache SSR output
+            in memory or on disk, depending on deployment. Data fetching hooks
+            like <code>getServerSideProps</code> or RTK Query can implement
+            their own caching strategies. Cache invalidation is explicit via
+            revalidation intervals, tags, or manual purges.
           </div>
         </details>
         <details class="qa" data-level="advanced">
@@ -1190,12 +1190,13 @@ State/Props/Context/Store update
             <span class="badge">Advanced</span>Hydration mismatch causes?
           </summary>
           <div class="answer">
-            Server and client render different initial markup due to
-            time/randomness, browser-only state, invalid HTML nesting,
-            locale/timezone differences, extension mutations, or data races. Fix
-            by making initial render deterministic, moving browser-only logic to
-            effects/client boundaries, or intentionally suppressing only
-            understood mismatches.
+               Mismatches occur when the server-rendered HTML does not match the
+               client-rendered output. Causes include non-deterministic rendering
+               (random values, dates, Math.random), browser-only APIs in server
+               code, conditional rendering based on client state, and differences
+               in environment (e.g., locale, time zone). Use <code>useEffect</code>
+               or <code>useLayoutEffect</code> for client-only logic and ensure
+               deterministic output for SSR.
           </div>
         </details>
         <h3>Production checklist</h3>
