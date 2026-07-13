@@ -1190,23 +1190,21 @@ State/Props/Context/Store update
             <span class="badge">Advanced</span>Hydration mismatch causes?
           </summary>
           <div class="answer">
-               Mismatches occur when the server-rendered HTML does not match the
-               client-rendered output. Causes include non-deterministic rendering
-               (random values, dates, Math.random), browser-only APIs in server
-               code, conditional rendering based on client state, and differences
-               in environment (e.g., locale, time zone). Use <code>useEffect</code>
-               or <code>useLayoutEffect</code> for client-only logic and ensure
-               deterministic output for SSR.
+            Mismatches occur when the server-rendered HTML does not match the
+            client-rendered output. Causes include non-deterministic rendering
+            (random values, dates, Math.random), browser-only APIs in server
+            code, conditional rendering based on client state, and differences
+            in environment (e.g., locale, time zone). Use
+            <code>useEffect</code> or <code>useLayoutEffect</code> for
+            client-only logic and ensure deterministic output for SSR.
           </div>
         </details>
         <h3>Production checklist</h3>
         <p>
-          Rendering strategy per route; server/client boundary; caching and
-          revalidation; authentication and authorization; middleware scope;
-          metadata/SEO; Core Web Vitals; image/font optimization; code
-          splitting; environment secrets; API/route handlers; streaming and
-          loading states; error boundaries; deployment runtime; logging and
-          tracing.
+          <b>Performance:</b> Use <code>next/image</code> for optimized images,
+          <code>next/script</code> for third-party scripts, and analyze bundle
+          size with <code>next build --profile</code>. Prefer ISR or SSG for
+          cacheable pages. Use React Profiler to identify slow components.
         </p>
         <div class="callout">
           <b>Version trap:</b> Next.js caching and rendering semantics evolve.
