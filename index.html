@@ -1221,8 +1221,6 @@ State/Props/Context/Store update
           <li>Image optimization and script loading</li>
           <li>Bundle analysis and performance profiling</li>
         </ul>
-
-        
       </section>
 
       <section id="node" class="chapter searchable">
@@ -1246,11 +1244,13 @@ State/Props/Context/Store update
             phases.
           </summary>
           <div class="answer">
-            At a high level: timers, pending callbacks, idle/prepare internals,
-            poll, check, and close callbacks. <code>process.nextTick</code> has
-            its own high-priority queue and can starve I/O if recursively
-            scheduled. Promise microtasks are also processed between
-            turns/callback boundaries according to Node's runtime semantics.
+            The event loop has multiple phases: timers, pending callbacks,
+            idle/prepare, poll, check, and close callbacks. Each phase has a
+            FIFO queue of callbacks. After the poll phase, the check phase runs
+            <code>setImmediate</code> callbacks. Microtasks (Promise reactions,
+            <code>queueMicrotask</code>) run after each callback and before the
+            next phase. If the poll queue is empty, the loop may block for I/O
+            or proceed to check/close phases.
           </div>
         </details>
         <details class="qa" data-level="advanced">
@@ -1258,12 +1258,13 @@ State/Props/Context/Store update
             <span class="badge">Advanced</span>Streams and backpressure?
           </summary>
           <div class="answer">
-            Streams process data incrementally instead of buffering the entire
-            payload. Backpressure prevents a fast producer from overwhelming a
-            slower consumer. For writable streams, if
-            <code>write()</code> returns false, wait for <code>drain</code>.
-            Prefer <code>pipeline()</code> because it propagates errors and
-            closes streams safely.
+            Streams are abstractions for reading/writing data in chunks.
+            Backpressure occurs when the consumer cannot keep up with the
+            producer. Node.js streams implement a pull-based mechanism: the
+            readable stream signals when it is ready for more data, and the
+            writable stream can pause/resume based on its internal buffer.
+            Properly handling backpressure prevents memory bloat and ensures
+            smooth data flow.
           </div>
         </details>
         <details class="qa" data-level="senior">
@@ -1272,13 +1273,13 @@ State/Props/Context/Store update
             Processes?
           </summary>
           <div class="answer">
-            Cluster runs multiple Node processes, historically useful for
-            sharing a server port across CPU cores. Worker Threads provide
-            parallel JavaScript execution with lower communication overhead and
-            optional shared memory. Child Processes run separate processes and
-            are ideal for isolation or invoking external programs. In
-            containers, horizontal scaling across replicas is often preferred
-            over cluster.
+            <b>Cluster:</b> Multiple Node.js processes sharing the same port,
+            each with its own event loop and memory. Good for scaling I/O-bound
+            workloads across CPU cores. <b>Worker Threads:</b> Multiple threads
+            within a single process, sharing memory. Suitable for CPU-bound
+            tasks that need shared state. <b>Child Processes:</b> Separate OS
+            processes that can run any executable, communicate via IPC. Useful
+            for isolation or running non-Node.js code.
           </div>
         </details>
         <details class="qa" data-level="faang">
@@ -1287,13 +1288,22 @@ State/Props/Context/Store update
             millions of requests?
           </summary>
           <div class="answer">
-            Keep instances stateless; load balance across replicas; cache hot
-            reads; use CDN for static/public cacheable content; add indexes and
-            read replicas where justified; paginate; move slow work to queues;
-            enforce timeouts, retries with jitter, circuit breakers, rate
-            limits, idempotency, and backpressure; partition data only when
-            simpler measures stop working; instrument p95/p99 latency, errors,
-            saturation, queue depth, and dependency health.
+            <ul>
+              <li>
+                Use a load balancer to distribute traffic across multiple
+                instances.
+              </li>
+              <li>Implement horizontal scaling with stateless services.</li>
+              <li>Use caching (CDN, Redis) to reduce database load.</li>
+              <li>Optimize database queries and use read replicas.</li>
+              <li>
+                Implement rate limiting and throttling to protect against abuse.
+              </li>
+              <li>
+                Monitor performance metrics and set up auto-scaling based on
+                load.
+              </li>
+            </ul>
           </div>
         </details>
         <h3>Express production pipeline</h3>
