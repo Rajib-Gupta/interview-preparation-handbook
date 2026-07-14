@@ -1348,12 +1348,12 @@ Request → Request ID → Security Headers → CORS → Body Limits → AuthN �
             authentication?
           </summary>
           <div class="answer">
-            JWTs can support stateless verification and cross-service claims but
-            are difficult to revoke immediately and are often overused.
-            Server-side sessions allow straightforward revocation and smaller
-            opaque cookies but require shared/session storage at scale. For
-            browser apps, prefer secure, HttpOnly, SameSite cookies where
-            appropriate and model CSRF carefully.
+            Session-based authentication stores a session ID on the server and
+            a cookie on the client. JWT-based authentication encodes claims in a
+            signed token that the client sends with each request. Sessions can
+            be invalidated server-side; JWTs are stateless but require careful
+            expiry and revocation strategies. Both can be secure if implemented
+            correctly, but JWTs are often used for stateless APIs and microservices.
           </div>
         </details>
         <details class="qa" data-level="beginner">
@@ -1361,10 +1361,10 @@ Request → Request ID → Security Headers → CORS → Body Limits → AuthN �
             <span class="badge">Beginner</span>Authentication vs authorization?
           </summary>
           <div class="answer">
-            Authentication establishes who the principal is. Authorization
-            decides what that principal may do. RBAC maps users to roles and
-            roles to permissions; ABAC uses attributes and policies. Always
-            enforce authorization server-side at the resource/action boundary.
+            Authentication is the process of verifying a user's identity, while
+            authorization determines what actions or resources the authenticated
+            user is allowed to access. In other words, authentication answers
+            "Who are you?" and authorization answers "What can you do?"
           </div>
         </details>
         <details class="qa" data-level="advanced">
@@ -1373,13 +1373,14 @@ Request → Request ID → Security Headers → CORS → Body Limits → AuthN �
             injection differ?
           </summary>
           <div class="answer">
-            XSS executes attacker-controlled script in a trusted origin. CSRF
-            tricks an authenticated browser into making an unwanted request.
-            CORS is a browser policy controlling cross-origin reads; it is not
-            authentication. SQL injection changes query meaning through unsafe
-            input interpolation. Mitigate with output encoding/safe rendering,
-            CSP, CSRF tokens or SameSite strategy, strict origin policy,
-            parameterized queries, least privilege, and validation.
+            XSS (Cross-Site Scripting) is a client-side attack where malicious
+            scripts are injected into web pages viewed by other users. CSRF
+            (Cross-Site Request Forgery) tricks an authenticated user into
+            performing unwanted actions on a web application. CORS (Cross-Origin
+            Resource Sharing) is a browser security feature that restricts
+            cross-origin HTTP requests. SQL injection is a server-side attack
+            where malicious SQL code is inserted into queries, potentially
+            compromising the database.
           </div>
         </details>
         <details class="qa" data-level="senior">
@@ -1387,11 +1388,10 @@ Request → Request ID → Security Headers → CORS → Body Limits → AuthN �
             <span class="badge">Senior</span>Design retries correctly.
           </summary>
           <div class="answer">
-            Retry only transient failures; cap attempts; use exponential backoff
-            plus jitter; set per-attempt and overall deadlines; respect
-            <code>Retry-After</code>; make side effects idempotent; avoid
-            synchronized retry storms; use circuit breakers when dependency
-            failure persists; expose retry metrics.
+            Retries should be applied only to idempotent operations. Use
+            exponential backoff with jitter to avoid thundering herds. Set a
+            maximum retry count and consider circuit breakers for persistent
+            failures. Log and monitor retry behavior to detect systemic issues.
           </div>
         </details>
         <details class="qa" data-level="advanced">
@@ -1399,11 +1399,10 @@ Request → Request ID → Security Headers → CORS → Body Limits → AuthN �
             <span class="badge">Advanced</span>What is idempotency?
           </summary>
           <div class="answer">
-            An operation is idempotent when repeating it has the same intended
-            effect as performing it once. For payment/workflow creation, accept
-            an idempotency key, persist the key with request fingerprint and
-            result/status under a uniqueness constraint, and return the original
-            result for safe repeats.
+            An operation is idempotent if performing it multiple times has the
+            same effect as performing it once. In HTTP, GET, PUT, and DELETE are
+            idempotent methods, while POST is not. Idempotency is important for
+            safely retrying requests without unintended side effects.
           </div>
         </details>
         <details class="qa" data-level="intermediate">
@@ -1411,26 +1410,24 @@ Request → Request ID → Security Headers → CORS → Body Limits → AuthN �
             <span class="badge">Intermediate</span>REST API design checklist?
           </summary>
           <div class="answer">
-            Resource-oriented URLs, correct methods/status codes, validation,
-            consistent errors, pagination, filtering/sorting, versioning
-            strategy, idempotency, authentication/authorization, rate limits,
-            timeouts, observability, OpenAPI contract, and backward
-            compatibility.
+            Use nouns for resources, pluralize collections, use HTTP methods
+            correctly (GET, POST, PUT, DELETE), support filtering/sorting/paging
+            via query parameters, version your API, return appropriate status
+            codes, and provide consistent error responses. Consider HATEOAS for
+            discoverability and document your API with OpenAPI/Swagger.
           </div>
         </details>
         <h3>Security revision checklist</h3>
         <p>
-          Password hashing (Argon2/bcrypt), secure cookies, JWT expiry/rotation
-          strategy, OAuth/OIDC basics, RBAC/ABAC, input validation, output
-          encoding, CSP, CORS, CSRF, XSS, SQL/NoSQL injection, SSRF, IDOR/BOLA,
-          rate limiting, secrets management, encryption in transit/at rest,
-          audit logs, dependency security, file-upload validation, signed URLs,
-          malware scanning, least privilege.
+          <b>Must know:</b> XSS, CSRF, CORS, SQL injection, parameterized
+          queries, input validation, output encoding, authentication vs
+          authorization, JWT vs session, HTTPS/TLS, password hashing (bcrypt,
+          Argon2), rate limiting, logging sensitive data, and secure headers
+          (CSP, HSTS).
         </p>
         <div class="callout">
-          <b>Rapid revision:</b> CORS is not authentication; JWT is not
-          encryption; frontend role checks are not authorization; validation
-          alone does not replace parameterized queries.
+          <b>Rapid revision:</b> Understand the OWASP Top 10, secure coding
+          practices, and how to defend against common web vulnerabilities.
         </div>
       </section>
 
