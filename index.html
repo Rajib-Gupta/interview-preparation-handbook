@@ -1348,12 +1348,13 @@ Request → Request ID → Security Headers → CORS → Body Limits → AuthN �
             authentication?
           </summary>
           <div class="answer">
-            Session-based authentication stores a session ID on the server and
-            a cookie on the client. JWT-based authentication encodes claims in a
+            Session-based authentication stores a session ID on the server and a
+            cookie on the client. JWT-based authentication encodes claims in a
             signed token that the client sends with each request. Sessions can
             be invalidated server-side; JWTs are stateless but require careful
             expiry and revocation strategies. Both can be secure if implemented
-            correctly, but JWTs are often used for stateless APIs and microservices.
+            correctly, but JWTs are often used for stateless APIs and
+            microservices.
           </div>
         </details>
         <details class="qa" data-level="beginner">
@@ -1439,11 +1440,12 @@ Request → Request ID → Security Headers → CORS → Body Limits → AuthN �
             internally?
           </summary>
           <div class="answer">
-            Usually a B-tree/B+ tree structure for ordered lookups; some systems
-            also support hash, GIN, GiST, full-text, geospatial, or other index
-            types. An index trades additional storage and write cost for faster
-            reads. Composite index usefulness depends on column order,
-            selectivity, predicates, sorting, and the database optimizer.
+            A database index is a data structure (commonly a B-tree or hash)
+            that allows the database to quickly locate rows based on indexed
+            columns. It stores key-value pairs where the key is the indexed
+            column value and the value is a pointer to the corresponding row in
+            the table. Indexes improve read performance but add overhead for
+            writes and storage.
           </div>
         </details>
         <details class="qa" data-level="advanced">
@@ -1452,12 +1454,12 @@ Request → Request ID → Security Headers → CORS → Body Limits → AuthN �
             worse?
           </summary>
           <div class="answer">
-            Every insert/update/delete may need index maintenance; indexes
-            consume memory and storage; low-selectivity indexes may not help;
-            too many indexes increase write amplification; and an unsuitable
-            index can encourage a poor plan. Validate with
-            <code>EXPLAIN</code>/<code>EXPLAIN ANALYZE</code> and
-            production-like data.
+            Indexes can slow down write operations (INSERT, UPDATE, DELETE) due
+            to the overhead of maintaining the index structure. They also
+            consume additional disk space and memory. If a query does not filter
+            on indexed columns or if the index is not selective, the database
+            may choose a full table scan instead, making the index unused and
+            adding unnecessary overhead.
           </div>
         </details>
         <details class="qa" data-level="senior">
@@ -1466,14 +1468,15 @@ Request → Request ID → Security Headers → CORS → Body Limits → AuthN �
             your fintech platform?
           </summary>
           <div class="answer">
-            A strong answer starts from access patterns and invariants.
-            PostgreSQL is a natural choice for transactional financial entities,
-            joins, constraints, and complex querying. MySQL is also a strong
-            relational choice with different operational/ecosystem trade-offs.
-            MongoDB is useful where aggregate-shaped documents, flexible
-            evolving payloads, or raw third-party responses fit document access
-            patterns. Avoid saying MongoDB has 'no schema'; production systems
-            still require schema governance and validation.
+            PostgreSQL offers strong ACID compliance, advanced SQL features, and
+            robust indexing, making it suitable for complex financial
+            transactions. MySQL is widely used, has good performance, and is
+            easier to set up, but may lack some advanced features. MongoDB is a
+            NoSQL document database that provides flexibility in schema design
+            and horizontal scaling, but may require additional effort to ensure
+            data integrity and consistency. The choice depends on the specific
+            requirements of the fintech platform, such as transaction volume,
+            data complexity, and scalability needs.
           </div>
         </details>
         <details class="qa" data-level="advanced">
@@ -1482,13 +1485,15 @@ Request → Request ID → Security Headers → CORS → Body Limits → AuthN �
             anomalies.
           </summary>
           <div class="answer">
-            Atomicity: all-or-nothing transaction. Consistency: transactions
-            preserve declared invariants. Isolation: concurrent transactions
-            behave according to an isolation level. Durability: committed data
-            survives failures within the database's guarantees. Know dirty
-            reads, non-repeatable reads, phantom reads, lost updates, write
-            skew, MVCC, locks, and why serializable isolation has higher
-            coordination cost.
+            ACID stands for Atomicity, Consistency, Isolation, and Durability.
+            Atomicity ensures that a transaction is all-or-nothing. Consistency
+            ensures that a transaction brings the database from one valid state
+            to another. Isolation ensures that concurrent transactions do not
+            interfere with each other. Durability ensures that once a
+            transaction is committed, it will remain so, even in the event of a
+            crash. Isolation anomalies include dirty reads, non-repeatable
+            reads, and phantom reads, which can occur when transactions are not
+            properly isolated.
           </div>
         </details>
         <details class="qa" data-level="intermediate">
@@ -1497,10 +1502,12 @@ Request → Request ID → Security Headers → CORS → Body Limits → AuthN �
             problem?
           </summary>
           <div class="answer">
-            One query fetches N parent records, then N additional queries fetch
-            related data. Fix with joins, batching, prefetching,
-            DataLoader-style aggregation, or redesigned endpoints. Measure
-            because one giant join can also cause row explosion.
+            The N+1 query problem occurs when an application executes one query
+            to retrieve a list of entities (N) and then executes an additional
+            query for each entity to retrieve related data (+1 for each). This
+            results in N+1 total queries, which can lead to performance issues.
+            Solutions include eager loading, batch fetching, or using joins to
+            retrieve all necessary data in a single query.
           </div>
         </details>
         <h3>Database decision matrix</h3>
